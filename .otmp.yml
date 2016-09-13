@@ -1,0 +1,12 @@
+name: Screen Sharing Sample App
+author: TokBox, Inc.
+website: https://tokbox.com
+tags:
+ - feature
+ - tutorial
+description: The OpenTok Screen Sharing Accelerator Pack provides functionality you can add to your OpenTok applications that enables users share contents of the screen from one endpoint to another.
+image: https://static.opentok.com/img/styleguide/tokbox-logo-vertical.png
+platforms:
+ - js
+ - iOS
+ - Android
