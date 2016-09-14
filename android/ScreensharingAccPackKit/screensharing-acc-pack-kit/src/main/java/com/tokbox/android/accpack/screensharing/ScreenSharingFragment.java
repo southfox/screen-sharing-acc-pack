@@ -391,7 +391,7 @@ public class ScreenSharingFragment extends Fragment implements AccPackSession.Se
    */
     public void enableRemoteAnnotations(boolean annotationsEnabled, AnnotationsToolbar toolbar, ViewGroup view, Subscriber subscriber) {
         //TODO connectionId from STREAM instead of sessioonconnectionId
-        AnnotationsView remoteAnnotationsView = new AnnotationsView(getContext(), mSession, mApiKey, false, AnnotationsView.ViewType.SubscriberView);
+        AnnotationsView remoteAnnotationsView = new AnnotationsView(getContext(), mSession, mApiKey, false, AnnotationsView.ViewType.SubscriberView, subscriber.getStream().getConnection().getConnectionId());
 
         AnnotationsVideoRenderer renderer = new AnnotationsVideoRenderer(getContext());
         subscriber.setRenderer(renderer);
