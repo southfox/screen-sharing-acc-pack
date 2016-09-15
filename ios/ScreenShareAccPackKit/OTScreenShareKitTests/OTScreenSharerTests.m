@@ -19,7 +19,7 @@ context(@"Initialization of OTScreenSharer", ^(){
         [OTScreenSharer setOpenTokApiKey:@"testScreenSharerComponent"
                                sessionId:@"testScreenSharerComponent"
                                    token:@"testScreenSharerComponent"];
-        ss = [OTScreenSharer screenSharer];
+        ss = [OTScreenSharer sharedInstance];
     });
     
     describe(@"An instance of OTScreenSharer", ^(){
