@@ -50,8 +50,8 @@ android {
         zipBundle.dependsOn javadoc
 
     }
-    testOptions {
-        unitTests.returnDefaultValues = true
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
     }
 }
 
@@ -94,8 +94,8 @@ def getRevisionAndTime() {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.opentok.android:opentok-annotations:2.0.+'
+    androidTestCompile 'junit:junit:4.12'
 }
