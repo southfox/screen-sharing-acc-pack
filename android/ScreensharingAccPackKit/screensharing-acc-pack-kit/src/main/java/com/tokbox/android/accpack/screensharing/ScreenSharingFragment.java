@@ -162,12 +162,6 @@ public class ScreenSharingFragment extends Fragment implements AccPackSession.Se
 
         void onAnnotationsRemoteViewReady(AnnotationsView view);
 
-        /**
-         * Invoked when the close button is clicked.
-         *
-         */
-        void onClosed();
-
     }
 
     /*
@@ -385,30 +379,6 @@ public class ScreenSharingFragment extends Fragment implements AccPackSession.Se
     }
 
     /*
-   * Enable or disable the annotations in the remote.
-   * @param annotationsEnabled <code>true</code> if remote annotations are enabled; <code>false</code> otherwise.
-   * @param toolbar The annotations toolbar.
-   */
-    public void enableRemoteAnnotations(boolean annotationsEnabled, AnnotationsToolbar toolbar, ViewGroup view, Subscriber subscriber) {
-        try {
-            AnnotationsView remoteAnnotationsView = new AnnotationsView(getContext(), mSession, mApiKey, subscriber);
-
-            AnnotationsVideoRenderer renderer = new AnnotationsVideoRenderer(getContext());
-            subscriber.setRenderer(renderer);
-            remoteAnnotationsView.setVideoRenderer(renderer);
-
-            mRemoteAnnotationsToolbar = toolbar;
-            remoteAnnotationsView.attachToolbar(mRemoteAnnotationsToolbar);
-            isRemoteAnnotationsEnabled = annotationsEnabled;
-
-            onAnnotationsRemoteViewReady(remoteAnnotationsView);
-            ((ViewGroup) view).addView(remoteAnnotationsView);
-        } catch (Exception e){
-            Log.i(LOG_TAG, "Exception - enableRemoteAnnotations: "+e);
-        }
-    }
-
-    /*
     * Enable or disable the audio in the screensharing.
     * @param enabled <code>true</code> if  the audio is enabled; <code>false</code> otherwise.
     */
@@ -529,12 +499,6 @@ public class ScreenSharingFragment extends Fragment implements AccPackSession.Se
         }
     }
 
-    protected void onClosed(){
-        if ( mListener != null ){
-            mListener.onClosed();
-        }
-    }
-
     protected void onAnnotationsViewReady(AnnotationsView view){
         if ( mListener != null ){
             mListener.onAnnotationsViewReady(view);
@@ -615,8 +579,8 @@ public class ScreenSharingFragment extends Fragment implements AccPackSession.Se
         mScreen.removeView(mAnnotationsView);
         checkAnnotations();
         onScreenSharingStopped();
-        onClosed();
         isStarted = false;
+        mAnnotationsView = null;
     }
 
     @Override
