@@ -17,7 +17,9 @@ gulp.task('js', function () {
     .pipe(gulp.dest(dist));
 
   var min = gulp.src('dist/opentok-screen-sharing.js')
-    .pipe(uglify())
+    .pipe(uglify().on('error', function (e) {
+      console.log(e);
+    }))
     .pipe(rename({
       suffix: '.min',
     }))
@@ -36,9 +38,9 @@ gulp.task('css', function () {
 
 gulp.task('images', function () {
   return gulp.src(
-    [
-      'images/**',
-    ], { base: 'images/' })
+      [
+        'images/**',
+      ], { base: 'images/' })
     .pipe(gulp.dest('dist/images'));
 });
 

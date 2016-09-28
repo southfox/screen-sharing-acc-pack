@@ -417,7 +417,7 @@
       'extensionID',
       'extensionPathFF',
       'screensharingParent',
-      'controlsContainer'
+      'controlsContainer',
       'localScreenProperties',
       'dev'
     ];
