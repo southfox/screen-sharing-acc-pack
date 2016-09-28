@@ -125,7 +125,7 @@
 
   var _setupUI = function (parent) {
     $('body').append(_screenDialogsExtensions);
-    $(_this._screenSharingControls).append(_screenSharingControl);
+    $(_this.controlsContainer).append(_screenSharingControl);
     $(parent).append(_screenSharingView);
   };
 
@@ -417,13 +417,14 @@
       'extensionID',
       'extensionPathFF',
       'screensharingParent',
+      'controlsContainer'
       'localScreenProperties',
       'dev'
     ];
 
     _.extend(_this, _.defaults(_.pick(options, optionsProps)), {
       screenSharingParent: '#videoContainer',
-      _screenSharingControls: '#feedControls'
+      controlsContainer: '#feedControls'
     });
 
     // Do UIy things
