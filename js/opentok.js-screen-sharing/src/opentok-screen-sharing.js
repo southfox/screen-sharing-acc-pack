@@ -425,10 +425,10 @@
       'dev'
     ];
 
-    _.extend(_this, _.defaults(_.pick(options, optionsProps)), {
+    _.extend(_this, _.defaults(_.pick(options, optionsProps), {
       screenSharingParent: '#videoContainer',
       controlsContainer: '#feedControls'
-    });
+    }));
 
     // Do UIy things
     _setupUI(_this.screensharingParent);
