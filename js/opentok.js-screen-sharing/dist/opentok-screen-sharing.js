@@ -123,6 +123,17 @@
     _otkanalytics.logEvent(data);
   };
 
+  var _defaultScreenProperties = {
+    insertMode: 'append',
+    width: '100%',
+    height: '100%',
+    showControls: false,
+    style: {
+      buttonDisplayMode: 'off',
+    },
+    videoSource: 'window',
+  };
+
   var _setupUI = function (parent) {
     $('body').append(_screenDialogsExtensions);
     $(_this.controlsContainer).append(_screenSharingControl);
@@ -152,13 +163,17 @@
 
       var innerDeferred = $.Deferred();
 
-      var container = publisherDiv || document.getElementById('videoHolderSharedScreen');
+      var container = publisherDiv || _this.screenSharingContainer;
+      var properties =
+        _this.localScreenProperties ||
+        _this.localScreenProperties ||
+        _defaultScreenProperties;
 
-      _this.publisher = OT.initPublisher(container, _this.localScreenProperties, function (error) {
+      _this.publisher = OT.initPublisher(container, properties, function (error) {
         if (error) {
           _triggerEvent('screenSharingError', error);
           innerDeferred.reject(_.extend(_.omit(error, 'messsage'), {
-            message: 'Error starting the screen sharing'
+            message: 'Error starting the screen sharing',
           }));
         } else {
           innerDeferred.resolve();
@@ -295,7 +310,7 @@
     if (callEnded) {
       _toggleScreenSharingButton(false);
     }
-    _triggerEvent('endScreenSharing');
+    _triggerEvent('endScreenSharing', _this.publisher);
     _log(_logEventData.actionEnd, _logEventData.variationSuccess);
   };
 
@@ -419,16 +434,22 @@
       'extensionURL',
       'extensionID',
       'extensionPathFF',
-      'screensharingParent',
+      'screenSharingContainer',
+      'screenSharingParent',
       'controlsContainer',
+      'screenProperties',
       'localScreenProperties',
-      'dev'
+      'dev',
     ];
+
 
     _.extend(_this, _.defaults(_.pick(options, optionsProps), {
       screenSharingParent: '#videoContainer',
-      controlsContainer: '#feedControls'
+      screenSharingContainer: document.getElementById('videoHolderSharedScreen'),
+      controlsContainer: '#feedControls',
     }));
+
+
 
     // Do UIy things
     _setupUI(_this.screensharingParent);
