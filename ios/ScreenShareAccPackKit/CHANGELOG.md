@@ -4,6 +4,23 @@ The changelog for `screensharing-annotation-acc-pack` iOS.
 
 --------------------------------------
 
+1.1.2
+-----
+
+### Breaking changes
+
+- Remove `setOpenTokApiKey:sessionId:token:` from OTOneToOneCommunicator. Instead, force to use the one from `OTAcceleratorSession` to avoid redundancy.
+
+### Enhancements
+
+- Add reconnection callback.
+- Enhance documentation.
+
+
+### Fixes
+
+- Fixed `isSubscribeToAudio` and `isSubscribeToVideo` have a wrong value as `subscriber.stream` is not taken into account.
+
 1.1.1
 -----
 
