@@ -6,6 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
     OTScreenShareSignalSessionDidConnect = 0,
     OTScreenShareSignalSessionDidDisconnect,
@@ -60,7 +62,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *
  *  @return An error to indicate whether it connects successfully, non-nil if it fails.
  */
-- (NSError *)connectWithView:(UIView *)view;
+- (nullable NSError *)connectWithView:(UIView *)view;
 
 /**
  *  An alternative connect method with a completion block handler.
@@ -76,7 +78,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *
  *  @return An error to indicate whether it disconnects successfully, non-nil if it fails.
  */
-- (NSError *)disconnect;
+- (nullable NSError *)disconnect;
 
 /**
  *  Change the sharing UIView, it does nothing if sharing is not started.
@@ -142,3 +144,5 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (nonatomic, getter=isPublishVideo) BOOL publishVideo;
 
 @end
+
+NS_ASSUME_NONNULL_END

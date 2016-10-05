@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <OpenTok/OpenTok.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol OTVideoCapture;
 
 /**
@@ -23,3 +25,5 @@
 - (instancetype)initWithView:(UIView*)view;
 
 @end
+
+NS_ASSUME_NONNULL_END
