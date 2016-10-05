@@ -59,6 +59,9 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  @param view The UIView to be shared
  *
  *  @return An error to indicate whether it connects successfully, non-nil if it fails.
+ *
+ *  @discussion Given an instance of UIView, it will publish a stream to OpenTok cloud as the video source. 
+ *  If nil, the screen sharer is able to subscribe a audio/video stream automatically.
  */
 - (NSError *)connectWithView:(UIView *)view;
 

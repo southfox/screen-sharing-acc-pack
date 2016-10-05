@@ -17,3 +17,5 @@ You can also add the OpenTok Screensharing Accelerator Pack to your apps. To get
 - [OpenTok Screensharing Accelerator Pack for Android](./android)
 - [OpenTok Screensharing Accelerator Pack for iOS](./ios)
 - [OpenTok Screensharing Accelerator Pack for JavaScript](./js)
+
+_**NOTE: The audio-video communication logic provided in all OpenTok One-to-One Communication Sample Apps is contained in the [OpenTok Common Accelerator Session Pack](https://github.com/opentok/acc-pack-common).**_

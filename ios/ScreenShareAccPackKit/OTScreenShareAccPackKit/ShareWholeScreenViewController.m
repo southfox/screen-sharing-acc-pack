@@ -29,10 +29,11 @@
     self.navigationItem.rightBarButtonItem = previewBarButtonItem;
 
     self.screenSharer = [OTScreenSharer sharedInstance];
-    [self.screenSharer connectWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view handler:^(OTScreenShareSignal signal, NSError *error) {
+    [self.screenSharer connectWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view
+                               handler:^(OTScreenShareSignal signal, NSError *error) {
         
-        NSLog(@"%@", error);
-    }];
+                                   NSLog(@"%@", error);
+                               }];
 }
 
 - (void)navigateToOtherViews {
