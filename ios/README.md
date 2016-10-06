@@ -4,13 +4,15 @@
 
 This document describes how to use the OpenTok Screensharing Accelerator Pack for iOS.
 
-### Install the project files
+## Add the library
 
-Use CocoaPods to install the project files and dependencies.
+To get up and running quickly with your development, go through the following steps using CocoaPods:
 
-1. Install CocoaPods as described in [CocoaPods Getting Started](https://guides.cocoapods.org/using/getting-started.html#getting-started).
-1. In Terminal, `cd` to your project directory and type `pod install`.
-1. Reopen your project in Xcode using the new `*.xcworkspace` file.
+1. Add the following line to your pod file: ` pod 'OTScreenShareKit'  `
+2. In a terminal prompt, navigate into your project directory and type `pod install`.
+3. Reopen your project using the new `*.xcworkspace` file.
+
+For more information about CocoaPods, including installation instructions, visit [CocoaPods Getting Started](https://guides.cocoapods.org/using/getting-started.html#getting-started).
 
 ### Configure and build the app
 
