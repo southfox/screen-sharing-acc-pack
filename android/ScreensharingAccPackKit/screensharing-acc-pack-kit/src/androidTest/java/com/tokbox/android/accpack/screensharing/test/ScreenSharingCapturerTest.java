@@ -29,44 +29,55 @@ public class ScreenSharingCapturerTest extends TestBase{
         super.tearDown();
     }
 
-    @Test
-    public void screenSharingBar_When_OK() throws Exception{
+    public void testScreenSharingCapturer() throws Exception{
         screenSharingCapturer = new ScreenSharingCapturer(context, view, imageReader);
         Assert.assertNotNull(screenSharingCapturer);
         Assert.assertFalse(screenSharingCapturer.isCaptureStarted());
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingBar_When_ContextIsNull() throws Exception{
-        screenSharingCapturer = new ScreenSharingCapturer(null, view, imageReader);
+    public void testScreenSharingCapturerWhenContextIsNull() throws Exception{
+        screenSharingCapturer = null;
+        try{
+            screenSharingCapturer = new ScreenSharingCapturer(null, view, imageReader);
+            Assert.fail("Should have thrown an exception when Context is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingCapturer);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingBar_When_ViewIsNull() throws Exception{
-        screenSharingCapturer = new ScreenSharingCapturer(context, null, imageReader);
+    public void testScreenSharingCapturerWhenViewIsNull() throws Exception{
+        screenSharingCapturer = null;
+        try{
+            screenSharingCapturer = new ScreenSharingCapturer(context, null, imageReader);
+            Assert.fail("Should have thrown an exception when View is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingCapturer);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingBar_When_ImageIsNull() throws Exception{
-        screenSharingCapturer = new ScreenSharingCapturer(context, view, null);
+    public void testScreenSharingCapturerWhenImageIsNull() throws Exception{
+        screenSharingCapturer = null;
+        try{
+            screenSharingCapturer = new ScreenSharingCapturer(context, view, null);
+            Assert.fail("Should have thrown an exception when Image is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingCapturer);
+        }
     }
 
-    @Test
-    public void startCapture_When_OK() throws Exception{
+    public void testStartCapture() throws Exception{
         screenSharingCapturer = new ScreenSharingCapturer(context, view, imageReader);
         Assert.assertEquals(0, screenSharingCapturer.startCapture());
         Assert.assertTrue(screenSharingCapturer.isCaptureStarted());
     }
 
-    @Test
-    public void stopCapture_When_OK() throws Exception{
+    public void testStopCapture() throws Exception{
         screenSharingCapturer = new ScreenSharingCapturer(context, view, imageReader);
         Assert.assertEquals(0, screenSharingCapturer.stopCapture());
         Assert.assertFalse(screenSharingCapturer.isCaptureStarted());
     }
 
-    @Test
-    public void getCaptureSettings_When_OK() throws Exception{
+    public void testGetCaptureSettings() throws Exception{
         screenSharingCapturer = new ScreenSharingCapturer(context, view, imageReader);
         BaseVideoCapturer.CaptureSettings captureSettings = screenSharingCapturer.getCaptureSettings();
         Assert.assertEquals(2, captureSettings.format);

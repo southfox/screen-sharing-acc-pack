@@ -1,16 +1,12 @@
 package com.tokbox.android.accpack.screensharing.test;
 
-import android.app.Instrumentation;
-import android.test.InstrumentationTestRunner;
-
 import com.tokbox.android.accpack.AccPackSession;
 import com.tokbox.android.accpack.screensharing.ScreenSharingBar;
 import com.tokbox.android.accpack.screensharing.ScreenSharingFragment;
 import com.tokbox.android.accpack.screensharing.config.APIConfig;
 import com.tokbox.android.accpack.screensharing.testbase.TestBase;
 import junit.framework.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
 
 public class ScreenSharingBarTest extends TestBase {
 
@@ -25,19 +21,30 @@ public class ScreenSharingBarTest extends TestBase {
         super.tearDown();
     }
 
-    @Test
-    public void screenSharingBar_When_OK() throws Exception{
+    public void testScreenSharingBar() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingBar = new ScreenSharingBar(context, ScreenSharingFragment.newInstance(session, apiKey));
         Assert.assertNotNull(screenSharingBar);
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingBar_When_ContextIsNull() throws Exception{
-        screenSharingBar = new ScreenSharingBar(null, ScreenSharingFragment.newInstance(session, apiKey));
+    public void testScreenSharingBarWhenContextIsNull(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
+        screenSharingBar = null;
+        try{
+            screenSharingBar = new ScreenSharingBar(null, ScreenSharingFragment.newInstance(session, apiKey));
+            Assert.fail("Should have thrown an exception when Context is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingBar);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingBar_When_ListenerIsNull() throws Exception{
-        screenSharingBar = new ScreenSharingBar(context, null);
+    public void testScreenSharingBarWhenListenerIsNull(){
+        screenSharingBar = null;
+        try{
+            screenSharingBar = new ScreenSharingBar(context, null);
+            Assert.fail("Should have thrown an exception when Listener is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingBar);
+        }
     }
 }

@@ -1,13 +1,12 @@
 package com.tokbox.android.accpack.screensharing.test;
 
 import com.opentok.android.Connection;
-import com.opentok.android.Session;
 import com.opentok.impl.ConnectionImpl;
 import com.tokbox.android.accpack.AccPackSession;
 import com.tokbox.android.accpack.screensharing.ScreenSharingFragment;
 import com.tokbox.android.accpack.screensharing.config.APIConfig;
 import com.tokbox.android.accpack.screensharing.testbase.TestBase;
-import com.tokbox.android.accpack.screensharing.utils.TestUtils;
+import com.tokbox.android.accpack.screensharing.util.TestUtils;
 import com.tokbox.android.annotations.AnnotationsToolbar;
 
 import junit.framework.Assert;
@@ -31,101 +30,132 @@ public class ScreenSharingFragmentTest extends TestBase {
         super.tearDown();
     }
 
-    @Test
-    public void screenSharingFragment_When_OK() throws Exception{
+    public void testScreenSharingFragment() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         Assert.assertNotNull(screenSharingFragment);
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingFragment_When_SessionIsNull() throws Exception{
-        screenSharingFragment = ScreenSharingFragment.newInstance(null, apiKey);
+    public void testScreenSharingFragmentWhenSessionIsNull(){
+        screenSharingFragment = null;
+        try{
+            screenSharingFragment = ScreenSharingFragment.newInstance(null, apiKey);
+            Assert.fail("Should have thrown an exception when Session is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingFragment);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingFragment_When_ApiKeyIsNull() throws Exception{
-        screenSharingFragment = ScreenSharingFragment.newInstance(session, null);
+    public void testScreenSharingFragmentWhenApiKeyIsNull(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
+        screenSharingFragment = null;
+        try{
+            screenSharingFragment = ScreenSharingFragment.newInstance(session, null);
+            Assert.fail("Should have thrown an exception when APIkey is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingFragment);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingFragment_When_ApiKeyIsEmpty() throws Exception{
-        screenSharingFragment = ScreenSharingFragment.newInstance(session, "");
+    public void testScreenSharingFragmentWhenApiKeyIsEmpty(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
+        screenSharingFragment = null;
+        try{
+            screenSharingFragment = ScreenSharingFragment.newInstance(session, "");
+            Assert.fail("Should have thrown an exception when APIkey is empty");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingFragment);
+        }
     }
 
-    @Test(expected=Exception.class)
-    public void screenSharingFragment_When_ApiKeyIsLongString() throws Exception{
-        screenSharingFragment = ScreenSharingFragment.newInstance(session, TestUtils.generateString(50));
+    public void testScreenSharingFragmentWhenApiKeyIsLongString(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
+        screenSharingFragment = null;
+        try{
+            screenSharingFragment = ScreenSharingFragment.newInstance(session, TestUtils.generateString(60));
+            Assert.fail("Should have thrown an exception when APIkey is too long");
+        }catch (Exception e) {
+            Assert.assertNull(screenSharingFragment);
+        }
     }
 
-    @Test
-    public void start_When_OK() throws Exception{
+    public void testStart() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.start();
         Assert.assertTrue(screenSharingFragment.isStarted());
     }
 
-    @Test
-    public void stop_When_OK() throws Exception{
+
+    public void testStop() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.stop();
         Assert.assertFalse(screenSharingFragment.isStarted());
     }
 
-    @Test
-    public void onSiganlReceived_When_OK() throws Exception{
+    public void testOnSiganlReceived() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), TestUtils.generateString(6), connection);
     }
 
-    @Test(expected=Exception.class)
-    public void onSiganlReceived_When_SessionIsNull() throws Exception{
+    public void testOnSiganlReceivedWhenSessionIsNull(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
-        screenSharingFragment.onSignalReceived(null, TestUtils.generateString(6), TestUtils.generateString(6), connection);
+        try{
+            screenSharingFragment = ScreenSharingFragment.newInstance(null, apiKey);
+            Assert.fail("Should have thrown an exception when Session is null");
+        }catch (Exception e) {}
     }
 
-    @Test
-    public void onSiganlReceived_When_TypeIsNull() throws Exception{
+    public void testOnSiganlReceivedWhenTypeIsNull() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, null, TestUtils.generateString(6), connection);
     }
 
-    @Test
-    public void onSiganlReceived_When_TypeIsEmpty() throws Exception{
+    public void testOnSiganlReceivedWhenTypeIsEmpty() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, "", TestUtils.generateString(6), connection);
     }
 
-    @Test
-    public void onSiganlReceived_When_TypeIsLong() throws Exception{
+    public void testOnSiganlReceivedWhenTypeIsLong() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, TestUtils.generateString(600), TestUtils.generateString(6), connection);
     }
 
-    @Test
-    public void onSiganlReceived_When_DataIsNull() throws Exception {
+    public void testOnSiganlReceivedWhenDataIsNull() throws Exception {
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), null, connection);
     }
-    @Test
-    public void onSiganlReceived_When_DataIsEmpty() throws Exception{
+
+    public void testOnSiganlReceivedWhenDataIsEmpty() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), "", connection);
     }
 
-    @Test
-    public void onSiganlReceived_When_DataIsLong() throws Exception{
+    public void testOnSiganlReceivedWhenDataIsLong() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), TestUtils.generateString(600), connection);
     }
 
-    @Test(expected=Exception.class)
-    public void onSiganlReceived_When_ConnectionIsNull() throws Exception{
+    public void testOnSiganlReceivedWhenConnectionIsNull(){
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
-        screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), TestUtils.generateString(6), null);
+        try{
+            screenSharingFragment.onSignalReceived(session, TestUtils.generateString(6), TestUtils.generateString(6), null);
+            Assert.fail("Should have thrown an exception when Connection is null");
+        }catch (Exception e) {}
     }
 
-    @Test
-    public void enableAnnotations_When_OK() throws Exception{
+    public void testEnableAnnotations() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.enableAnnotations(true, new AnnotationsToolbar(context));
         Assert.assertTrue(TestUtils.getPrivateField(screenSharingFragment, "isAnnotationsEnabled").get(screenSharingFragment).equals(true));
@@ -133,8 +163,8 @@ public class ScreenSharingFragmentTest extends TestBase {
         Assert.assertTrue(TestUtils.getPrivateField(screenSharingFragment, "isAnnotationsEnabled").get(screenSharingFragment).equals(false));
     }
 
-    @Test
-    public void enableAudioScreenSharing_When_OK() throws Exception{
+    public void testEnableAudioScreenSharing() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.enableAudioScreensharing(true);
         Assert.assertTrue(TestUtils.getPrivateField(screenSharingFragment, "isAudioEnabled").get(screenSharingFragment).equals(true));
@@ -142,22 +172,22 @@ public class ScreenSharingFragmentTest extends TestBase {
         Assert.assertTrue(TestUtils.getPrivateField(screenSharingFragment, "isAudioEnabled").get(screenSharingFragment).equals(false));
     }
 
-    @Test
-    public void onPause_When_OK() throws Exception{
+    public void testOnPause() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onPause();
         Assert.assertFalse(screenSharingFragment.isStarted());
     }
 
-    @Test
-    public void onResume_When_OK() throws Exception{
+    public void testOnResume() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onResume();
         Assert.assertTrue(screenSharingFragment.isStarted());
     }
 
-    @Test
-    public void onDestroy_When_OK() throws Exception{
+    public void testOnDestroy() throws Exception{
+        session = new AccPackSession(this.context, this.apiKey, this.sessionId);
         screenSharingFragment = ScreenSharingFragment.newInstance(session, apiKey);
         screenSharingFragment.onDestroy();
         Assert.assertNull(TestUtils.getPrivateField(screenSharingFragment, "mScreensharingBar").get(screenSharingFragment));

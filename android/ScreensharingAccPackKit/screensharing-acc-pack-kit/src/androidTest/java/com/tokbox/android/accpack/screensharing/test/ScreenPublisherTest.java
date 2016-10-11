@@ -1,14 +1,12 @@
 package com.tokbox.android.accpack.screensharing.test;
 
-import android.content.Context;
-
 import com.opentok.android.BaseVideoCapturer;
+import com.tokbox.android.accpack.AccPackSession;
 import com.tokbox.android.accpack.screensharing.ScreenPublisher;
 import com.tokbox.android.accpack.screensharing.testbase.TestBase;
-import com.tokbox.android.accpack.screensharing.utils.TestUtils;
+import com.tokbox.android.accpack.screensharing.util.TestUtils;
 
 import junit.framework.Assert;
-import junit.framework.TestResult;
 
 import org.junit.Test;
 
@@ -24,52 +22,56 @@ public class ScreenPublisherTest extends TestBase {
         super.tearDown();
     }
 
-    @Test
-    public void screenPublisher_When_OK() throws Exception{
+    public void testScreenPublisher() throws Exception{
         screenPublisher = new ScreenPublisher(context);
         Assert.assertNotNull(screenPublisher);
     }
 
-    @Test(expected=Exception.class)
-    public void screenPublisher_When_ConextIsNull() throws Exception{
-        screenPublisher = new ScreenPublisher(null);
+    public void testScreenPublisherWhenContextIsNull(){
+        screenPublisher = null;
+        try{
+            screenPublisher = new ScreenPublisher(null);
+            Assert.fail("Should have thrown an exception when Context is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenPublisher);
+        }
     }
 
-    @Test
-    public void screenPublisher_When_StringIsOK() throws Exception{
+    public void testScreenPublisherWhenStringIsOK() throws Exception{
         String name = TestUtils.generateString(6);
         screenPublisher = new ScreenPublisher(context, name);
         Assert.assertNotNull(screenPublisher);
         Assert.assertEquals(name, screenPublisher.getName());
     }
 
-    @Test
-    public void screenPublisher_When_StringIsEmpty() throws Exception{
+    public void testScreenPublisherWhenStringIsEmpty() throws Exception{
         screenPublisher = new ScreenPublisher(context, "");
         Assert.assertNotNull(screenPublisher);
     }
 
-    @Test
-    public void screenPublisher_When_StringIsNull() throws Exception{
+    public void testScreenPublisherWhenStringIsNull() throws Exception{
         screenPublisher = new ScreenPublisher(context, null);
         Assert.assertNotNull(screenPublisher);
     }
 
-    @Test
-    public void screenPublisher_When_StringIsLong() throws Exception{
+    public void testScreenPublisherWhenStringIsLong() throws Exception{
         String name = TestUtils.generateString(60);
         screenPublisher = new ScreenPublisher(context, name);
         Assert.assertNotNull(screenPublisher);
         Assert.assertEquals(name, screenPublisher.getName());
     }
 
-    @Test(expected=Exception.class)
-    public void  screenPublisher_When_CapturerIsNull() throws Exception {
-        screenPublisher = new ScreenPublisher(context, TestUtils.generateString(6), null);
+    public void  testScreenPublisherWhenCapturerIsNull() throws Exception {
+        screenPublisher = null;
+        try{
+            screenPublisher = new ScreenPublisher(context, TestUtils.generateString(6), null);
+            Assert.fail("Should have thrown an exception when Capturer is null");
+        }catch (Exception e) {
+            Assert.assertNull(screenPublisher);
+        }
     }
 
-    @Test
-    public void  screenPublisher_When_CapturerIsOK() throws Exception {
+    public void  testScreenPublisherWhenCapturerIsOK() throws Exception {
         String name = TestUtils.generateString(6);
         screenPublisher = new ScreenPublisher(context, name, new BaseVideoCapturer() {
             @Override

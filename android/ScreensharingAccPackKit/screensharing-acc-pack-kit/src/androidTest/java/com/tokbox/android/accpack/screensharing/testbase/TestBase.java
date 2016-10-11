@@ -74,29 +74,30 @@ public class TestBase extends AndroidTestCase {
         this.context = getContext();
     }
 
-    protected void setUp(int key, String secret) throws Exception {
+    protected void setUp(String key, String secret) throws Exception {
         super.setUp();
 
         this.context = getContext();
-        this.apiKey = String.valueOf(key);
+        this.apiKey = key;
         this.apiSecret = secret;
 
     }
-    protected void setUp(String sessionId, String token, int key) throws Exception {
+    protected void setUp(String sessionId, String token, String key) throws Exception {
         this.context = getContext();
-        this.apiKey = String.valueOf(key);
+        this.apiKey = key;
         this.token = token;
         this.sessionId = sessionId;
-        this.session = new AccPackSession(this.context, this.apiKey, this.sessionId);
     }
 
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        sessionConnectedLock = new CountDownLatch(1);
-        sessionErrorLock = new CountDownLatch(1);
-        sessionConnected.set(false);
-        sessionError.set(false);
+        this.sessionConnectedLock = new CountDownLatch(1);
+        this.sessionErrorLock = new CountDownLatch(1);
+        this.sessionConnected.set(false);
+        this.sessionError.set(false);
+        this.session = null;
+        this.sessionLastError = null;
     }
 
 

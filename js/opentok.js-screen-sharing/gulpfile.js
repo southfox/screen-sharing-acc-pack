@@ -4,7 +4,7 @@ var importCss = require('gulp-import-css');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var merge = require('merge-stream');
-// var zip = require('gulp-zip');
+var zip = require('gulp-zip');
 
 var dist = 'dist';
 
@@ -30,7 +30,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('css', function () {
-  return gulp.src('css/annotation.css')
+  return gulp.src('css/screen-share.css')
     .pipe(importCss())
     .pipe(gulp.dest(dist));
 });
@@ -44,15 +44,16 @@ gulp.task('images', function () {
     .pipe(gulp.dest('dist/images'));
 });
 
-// gulp.task('zip', function () {
-//   return gulp.src(
-//     [
-//       'dist/annotation.css',
-//       'dist/images/**',
-//       'dist/opentok-annotation.js',
-//     ], { base: 'dist/' })
-//   .pipe(zip('opentok-js-annotation-1.0.0.zip'))
-//   .pipe(gulp.dest(dist));
-// });
+gulp.task('zip', function () {
+  return gulp.src(
+    [
+      'dist/screen-share.css',
+      'dist/images/**',
+      'dist/opentok-screen-sharing.js',
+    ], { base: 'dist/' })
+  .pipe(zip('opentok-js-screen-sharing-1.1.0.zip'))
+  .pipe(gulp.dest(dist));
+});
 
-gulp.task('dist', ['js', 'css', 'images']);
+
+gulp.task('dist', ['js', 'css', 'images', 'zip']);

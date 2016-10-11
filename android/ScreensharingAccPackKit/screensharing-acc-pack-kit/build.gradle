@@ -12,6 +12,8 @@ android {
         versionName "1.0"
         project.archivesBaseName = "opentok-screensharing-annotations"
         project.version = "1.1.0"
+        testApplicationId "com.tokbox.android.accpack.screensharing.test"
+        testInstrumentationRunner "com.tokbox.android.accpack.screensharing.testbase.TestRunner"
     }
     buildTypes {
         release {
@@ -94,8 +96,9 @@ def getRevisionAndTime() {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.0'
+    androidTestCompile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.opentok.android:opentok-annotations:1.1.+'
     androidTestCompile 'junit:junit:4.12'
+    androidTestCompile files('src/androidTest/libs/android-junit-report-1.5.8.jar')
 }
