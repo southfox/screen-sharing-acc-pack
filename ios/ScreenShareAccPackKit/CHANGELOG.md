@@ -4,6 +4,28 @@ The changelog for `screensharing-annotation-acc-pack` iOS.
 
 --------------------------------------
 
+1.1.4
+-----
+
+### Enhancements
+
+- Add `subscriberVideoContentMode` for displaying a fit or fill video.
+- Add `subscribeToStreamWithName:` for switching to another stream.
+- Add `subscribeToStreamWithStreamId:` for switching to another stream.
+- Make sure that the publisher has a name.
+- Nil out `publisher` and `subscriber` in `disconnect` method for avoiding potential side effect.
+
+### Fixes
+
+- Perform un-subscription and do subscription if there are any new streams being created. This will ensure that the session does not hold extra unused subscribers.
+
+1.1.3
+-----
+
+### Enhancements
+
+- Enhance documentation
+
 1.1.2
 -----
 

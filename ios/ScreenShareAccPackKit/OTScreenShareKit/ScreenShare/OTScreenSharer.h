@@ -49,6 +49,12 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (readonly, nonatomic) BOOL isScreenSharing;
 
 /**
+ *  A string that represents the current communicator.
+ *  If not specified, the value will be "system name-name specified by Setting", e.g. @"iOS-MyiPhone"
+ */
+@property (nonatomic) NSString *publisherName;
+
+/**
  *  @return Returns the shared OTScreenSharer object.
  */
 + (instancetype)sharedInstance;
@@ -143,5 +149,20 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  A boolean value to indicate whether to publish video.
  */
 @property (nonatomic, getter=isPublishVideo) BOOL publishVideo;
+
+#pragma mark - advanced
+/**
+ *  Manually subscribe to a stream with a specfieid name.
+ *
+ *  @return An error to indicate whether it subscribes successfully, non-nil if it fails.
+ */
+- (NSError *)subscribeToStreamWithName:(NSString *)name;
+
+/**
+ *  Manually subscribe to a stream with a specfieid stream id.
+ *
+ *  @return An error to indicate whether it subscribes successfully, non-nil if it fails.
+ */
+- (NSError *)subscribeToStreamWithStreamId:(NSString *)streamId;
 
 @end
