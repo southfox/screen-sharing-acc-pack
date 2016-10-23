@@ -4,6 +4,13 @@ The changelog for `screensharing-annotation-acc-pack` iOS.
 
 --------------------------------------
 
+1.1.5
+-----
+
+### Enhancements
+
+- Nil out `publisherView` and `subscriberView` in `disconnect` method for avoiding potential side effect.
+
 1.1.4
 -----
 

@@ -53,6 +53,10 @@ static NSString * const KLogVariationFailure = @"Failure";
 @property (nonatomic) OTSubscriber *subscriber;
 @property (nonatomic) OTAcceleratorSession *session;
 @property (nonatomic) OTPublisher *publisher;
+
+@property (nonatomic) UIView *publisherView;
+@property (nonatomic) UIView *subscriberView;
+
 @property (strong, nonatomic) OTScreenShareBlock handler;
 
 @end
@@ -135,6 +139,7 @@ static NSString * const KLogVariationFailure = @"Failure";
             NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
         }
         self.publisher = nil;
+        self.publisherView = nil;
     }
 
     if (self.subscriber) {
@@ -146,6 +151,7 @@ static NSString * const KLogVariationFailure = @"Failure";
             NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
         }
         self.subscriber = nil;
+        self.subscriberView = nil;
     }
 
     NSError *disconnectError = [OTAcceleratorSession deregisterWithAccePack:self];
