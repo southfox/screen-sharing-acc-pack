@@ -114,6 +114,16 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (readonly, nonatomic) CGSize subscriberVideoDimension;
 
 /**
+ *  A boolean value to indicate whether the subscriber has audio available.
+ */
+@property (nonatomic, readonly) BOOL isRemoteAudioAvailable;
+
+/**
+ *  A boolean value to indicate whether the subscriber has video available.
+ */
+@property (nonatomic, readonly) BOOL isRemoteVideoAvailable;
+
+/**
  *  The view containing a playback buffer for associated video data. Add this view to your view heirarchy to display a video stream.
  *
  *  The subscriber view is available after OTScreenShareSignalSubscriberDidConnect being signaled.
@@ -121,14 +131,12 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (readonly, nonatomic) UIView *subscriberView;
 
 /**
- *  A boolean value to indicate whether the screen sharer has available audio from subscription.
- *  This property will take the stream's hasAudio into account internally.
+ *  A boolean value to indicate whether the screen sharer subscripts to audio.
  */
 @property (nonatomic, getter=isSubscribeToAudio) BOOL subscribeToAudio;
 
 /**
- *  A boolean value to indicate whether the screen sharer has available video from subscription.
- *  This property will take the stream's hasVideo into account internally.
+ *  A boolean value to indicate whether the screen sharer subscripts to video.
  */
 @property (nonatomic, getter=isSubscribeToVideo) BOOL subscribeToVideo;
 

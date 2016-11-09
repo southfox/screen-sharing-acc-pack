@@ -4,6 +4,13 @@ The changelog for `screensharing-annotation-acc-pack` iOS.
 
 --------------------------------------
 
+1.1.6
+-----
+
+### Enhancements
+
+- Introduce `isRemoteAudioAvailable` and `isRemoteVideoAvailable` to have more audio and video control.
+
 1.1.5
 -----
 
