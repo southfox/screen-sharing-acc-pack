@@ -22,11 +22,11 @@
 
 /* Begin PBXBuildFile section */
 		7A68384AEDB802DE1AD21175 /* libPods-OTScreenShareKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDCBEB0EC2FCD2033335A4A /* libPods-OTScreenShareKitTests.a */; };
+		A04B6E311DDBD63200AC0C25 /* OTScreenShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9FA9B1D40334600460599 /* OTScreenShareKit.framework */; };
+		A04B6E321DDBD63200AC0C25 /* OTScreenShareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A0E9FA9B1D40334600460599 /* OTScreenShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A058350C1D2F4BAD00E484FB /* ShareWholeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A058350B1D2F4BAD00E484FB /* ShareWholeScreenViewController.m */; };
 		A058350F1D2F4E4700E484FB /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A058350E1D2F4E4700E484FB /* ColorViewController.m */; };
 		A0844FB01D38512400D0EB83 /* OTScreenSharer_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A0844FAF1D38512400D0EB83 /* OTScreenSharer_Private.h */; };
-		A09A4AC71CD02A990024C349 /* OTScreenShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A09A4AC01CD02A990024C349 /* OTScreenShareKit.framework */; };
-		A09A4AC81CD02A990024C349 /* OTScreenShareKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A09A4AC01CD02A990024C349 /* OTScreenShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A0CFE14B1D25BF8200D8449B /* OTScreenShareKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A0CFE0BB1D25BF8200D8449B /* OTScreenShareKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0CFE14C1D25BF8200D8449B /* OTScreenSharer.h in Headers */ = {isa = PBXBuildFile; fileRef = A0CFE0BC1D25BF8200D8449B /* OTScreenSharer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0CFE14D1D25BF8200D8449B /* OTScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CFE0BD1D25BF8200D8449B /* OTScreenSharer.m */; };
@@ -54,12 +54,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A09A4AC51CD02A990024C349 /* PBXContainerItemProxy */ = {
+		A04B6E331DDBD63200AC0C25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A09A4A991CD02A800024C349 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A09A4ABF1CD02A990024C349;
-			remoteInfo = ScreenShareKit;
+			remoteGlobalIDString = A0E9FA8D1D40334600460599;
+			remoteInfo = OTScreenShareKitStatic;
 		};
 		A0CFE4681D25F49D00D8449B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -71,13 +71,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A09A4ACC1CD02A990024C349 /* Embed Frameworks */ = {
+		A04B6E351DDBD63200AC0C25 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A09A4AC81CD02A990024C349 /* OTScreenShareKit.framework in Embed Frameworks */,
+				A04B6E321DDBD63200AC0C25 /* OTScreenShareKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +120,7 @@
 		A0F292181D8667DF00BC6A53 /* ReceiveScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveScreenViewController.h; sourceTree = "<group>"; };
 		A0F292191D8667DF00BC6A53 /* ReceiveScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveScreenViewController.m; sourceTree = "<group>"; };
 		A0FEAC021D73BBB8000BDDA4 /* OTScreenShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OTScreenShareKit.podspec; sourceTree = "<group>"; };
-		A0FEAC031D73BBB8000BDDA4 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		A0FEAC031D73BBB8000BDDA4 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0FEAC061D73BBDE000BDDA4 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		A2E5456AE2E3ECC1E5D3CE8D /* Pods-OTScreenShareKitStatic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKitStatic.release.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKitStatic/Pods-OTScreenShareKitStatic.release.xcconfig"; sourceTree = "<group>"; };
 		C7B653F51CEDDD5DC05D0215 /* Pods-OTScreenShareKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKitTests/Pods-OTScreenShareKitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A09A4AC71CD02A990024C349 /* OTScreenShareKit.framework in Frameworks */,
+				A04B6E311DDBD63200AC0C25 /* OTScreenShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,12 +298,12 @@
 				A09A4A9D1CD02A800024C349 /* Sources */,
 				A09A4A9E1CD02A800024C349 /* Frameworks */,
 				A09A4A9F1CD02A800024C349 /* Resources */,
-				A09A4ACC1CD02A990024C349 /* Embed Frameworks */,
+				A04B6E351DDBD63200AC0C25 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A09A4AC61CD02A990024C349 /* PBXTargetDependency */,
+				A04B6E341DDBD63200AC0C25 /* PBXTargetDependency */,
 			);
 			name = OTScreenShareAccPackKit;
 			productName = ScreenShareSample;
@@ -619,10 +619,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A09A4AC61CD02A990024C349 /* PBXTargetDependency */ = {
+		A04B6E341DDBD63200AC0C25 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A09A4ABF1CD02A990024C349 /* OTScreenShareKit */;
-			targetProxy = A09A4AC51CD02A990024C349 /* PBXContainerItemProxy */;
+			target = A0E9FA8D1D40334600460599 /* OTScreenShareKitStatic */;
+			targetProxy = A04B6E331DDBD63200AC0C25 /* PBXContainerItemProxy */;
 		};
 		A0CFE4691D25F49D00D8449B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

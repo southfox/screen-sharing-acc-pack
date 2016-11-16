@@ -63,33 +63,32 @@ static NSString * const KLogVariationFailure = @"Failure";
 
 @implementation OTScreenSharer
 
-+ (instancetype) sharedInstance {
+- (instancetype)initWithDataSource:(id<OTScreenShareDataSource>)dataSource {
     
-    static OTScreenSharer *sharedInstance;
-    static dispatch_once_t onceToken;
+    return [self initWithName:[NSString stringWithFormat:@"%@-%@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].name]
+                   dataSource:dataSource];
+}
+
+- (instancetype)initWithName:(NSString *)name
+                  dataSource:(id<OTScreenShareDataSource>)dataSource {
     
-    if (!sharedInstance) {
-        [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationAttempt completion:nil];
+    [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationAttempt completion:nil];
+    
+    if (!dataSource) {
+        [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationFailure completion:nil];
+        return nil;
     }
     
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[OTScreenSharer alloc] init];
-        sharedInstance.session = [OTAcceleratorSession getAcceleratorPackSession];
-        
-        if (sharedInstance) {
-            [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationSuccess completion:nil];
-        }
-        else {
-            [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationFailure completion:nil];
-        }
-    });
-    return sharedInstance;
+    if (self = [super init]) {
+        _name = name;
+        _dataSource = dataSource;
+        _session = [_dataSource sessionOfOTScreenSharer:self];
+        [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationSuccess completion:nil];
+    }
+    return self;
 }
 
 - (NSError *)connectWithView:(UIView *)view {
-    
-    // refresh in case of credentials update
-    self.session = [OTAcceleratorSession getAcceleratorPackSession];
     
     SSLoggingWrapper *loggingWrapper = [SSLoggingWrapper sharedInstance];
     if (view) {
@@ -98,7 +97,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     [loggingWrapper.logger logEventAction:KLogActionStart
                     variation:KLogVariationAttempt
                    completion:nil];
-    NSError *registerError = [OTAcceleratorSession registerWithAccePack:self];
+    NSError *registerError = [self.session registerWithAccePack:self];
     if(registerError){
         [loggingWrapper.logger logEventAction:KLogActionStart
                         variation:KLogVariationFailure
@@ -154,7 +153,7 @@ static NSString * const KLogVariationFailure = @"Failure";
         self.subscriberView = nil;
     }
 
-    NSError *disconnectError = [OTAcceleratorSession deregisterWithAccePack:self];
+    NSError *disconnectError = [self.session deregisterWithAccePack:self];
     if (!disconnectError) {
         [loggingWrapper.logger logEventAction:KLogActionEnd
                                     variation:KLogVariationSuccess
@@ -193,11 +192,11 @@ static NSString * const KLogVariationFailure = @"Failure";
 
     if (!self.publisher) {
         
-        if (!self.publisherName) {
-            self.publisherName = [NSString stringWithFormat:@"%@-%@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].name];
+        if (!self.name) {
+            self.name = [NSString stringWithFormat:@"%@-%@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].name];
         }
         self.publisher = [[OTPublisher alloc] initWithDelegate:self
-                                                          name:self.publisherName
+                                                          name:self.name
                                                     audioTrack:YES
                                                     videoTrack:YES];
         

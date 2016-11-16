@@ -5,6 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <OTAcceleratorPackUtil/OTAcceleratorPackUtil.h>
 
 typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
     OTScreenShareSignalSessionDidConnect = 0,
@@ -36,12 +37,47 @@ typedef NS_ENUM(NSInteger, OTScreenShareVideoViewContentMode) {
 
 typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 
+@class OTScreenSharer;
+
+@protocol OTScreenShareDataSource <NSObject>
+- (OTAcceleratorSession *)sessionOfOTScreenSharer:(OTScreenSharer *)screenSharer;
+@end
+
 @protocol OTScreenShareDelegate <NSObject>
 - (void)screenShareWithSignal:(OTScreenShareSignal)signal
                         error:(NSError *)error;
 @end
 
 @interface OTScreenSharer : NSObject
+
+/**
+ *  The object that acts as the data source of the screen sharer.
+ *
+ *  The delegate must adopt the OTScreenShareDataSource protocol. The delegate is not retained.
+ */
+@property (weak, nonatomic) id<OTScreenShareDataSource> dataSource;
+
+/**
+ *  The object that acts as the delegate of the screen sharer.
+ *
+ *  The delegate must adopt the OTScreenShareDelegate protocol. The delegate is not retained.
+ */
+@property (weak, nonatomic) id<OTScreenShareDelegate> delegate;
+
+/**
+ *  Initialize a new `OTScreenSharer` instsance.
+ *
+ *  @return A new `OTScreenSharer` instsance.
+ */
+- (instancetype)initWithDataSource:(id<OTScreenShareDataSource>)dataSource;
+
+/**
+ *  Initialize a new `OTScreenSharer` instsance with a publisher name.
+ *
+ *  @return A new `OTScreenSharer` instsance.
+ */
+- (instancetype)initWithName:(NSString *)name
+                  dataSource:(id<OTScreenShareDataSource>)dataSource;
 
 /**
  *  A boolean value that indicates whether the specified UIView is sharing.
@@ -52,12 +88,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  A string that represents the current communicator.
  *  If not specified, the value will be "system name-name specified by Setting", e.g. @"iOS-MyiPhone"
  */
-@property (nonatomic) NSString *publisherName;
-
-/**
- *  @return Returns the shared OTScreenSharer object.
- */
-+ (instancetype)sharedInstance;
+@property (nonatomic) NSString *name;
 
 /**
  *  Registers to the shared session: [OTAcceleratorSession] and perform publishing/subscribing automatically with a given UIView.
@@ -91,13 +122,6 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  Change the sharing UIView, it does nothing if sharing is not started.
  */
 - (void)updateView:(UIView *)view;
-
-/**
- *  The object that acts as the delegate of the screen sharer.
- *
- *  The delegate must adopt the OTScreenShareDelegate protocol. The delegate is not retained.
- */
-@property (weak, nonatomic) id<OTScreenShareDelegate> delegate;
 
 #pragma mark - subscriber
 /**

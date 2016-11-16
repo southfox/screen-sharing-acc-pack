@@ -7,9 +7,10 @@
 //
 
 #import "ReceiveScreenViewController.h"
+#import "AppDelegate.h"
 #import <OTScreenShareKit/OTScreenShareKit.h>
 
-@interface ReceiveScreenViewController ()
+@interface ReceiveScreenViewController () <OTScreenShareDataSource>
 @property (nonatomic) OTScreenSharer *screenSharer;
 @end
 
@@ -21,7 +22,7 @@
     UIBarButtonItem *previewBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Navigate" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToOtherViews)];
     self.navigationItem.rightBarButtonItem = previewBarButtonItem;
     
-    self.screenSharer = [OTScreenSharer sharedInstance];
+    self.screenSharer = [[OTScreenSharer alloc] initWithDataSource:self];
     [self.screenSharer connectWithView:nil
                          handler:^(OTScreenShareSignal signal, NSError *error) {
                              
@@ -39,6 +40,11 @@
                                  }
                              }
                          }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.screenSharer disconnect];
 }
 
 - (void)navigateToOtherViews {
@@ -65,6 +71,10 @@
     }]];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (OTAcceleratorSession *)sessionOfOTScreenSharer:(OTScreenSharer *)screenSharer {
+    return [(AppDelegate*)[[UIApplication sharedApplication] delegate] getSharedAcceleratorSession];
 }
 
 @end
