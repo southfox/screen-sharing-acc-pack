@@ -13,11 +13,14 @@
 
 @implementation AppDelegate
 
+static OTAcceleratorSession *sharedSession;
+
+- (OTAcceleratorSession *)getSharedAcceleratorSession {
+    return sharedSession;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [OTAcceleratorSession setOpenTokApiKey:@"replace"
-                                 sessionId:@"replace"
-                                     token:@"replace"];
+    sharedSession = [[OTAcceleratorSession alloc] initWithOpenTokApiKey:<#apikey#> sessionId:<#sessionid#> token:<#token#>];
     return YES;
 }
 

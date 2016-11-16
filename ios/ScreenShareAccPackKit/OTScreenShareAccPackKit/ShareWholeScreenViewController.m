@@ -8,9 +8,10 @@
 
 #import "ShareWholeScreenViewController.h"
 #import "ColorViewController.h"
+#import "AppDelegate.h"
 #import <OTScreenShareKit/OTScreenShareKit.h>
 
-@interface ShareWholeScreenViewController ()
+@interface ShareWholeScreenViewController () <OTScreenShareDataSource>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic) UIColor *viewControllerColor;
 @property (nonatomic) OTScreenSharer *screenSharer;
@@ -28,12 +29,17 @@
     UIBarButtonItem *previewBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Navigate" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToOtherViews)];
     self.navigationItem.rightBarButtonItem = previewBarButtonItem;
 
-    self.screenSharer = [OTScreenSharer sharedInstance];
+    self.screenSharer = [[OTScreenSharer alloc] initWithDataSource:self];
     [self.screenSharer connectWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view
                                handler:^(OTScreenShareSignal signal, NSError *error) {
         
                                    NSLog(@"%@", error);
                                }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.screenSharer disconnect];
 }
 
 - (void)navigateToOtherViews {
@@ -104,6 +110,10 @@
 
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
     [self.screenSharer updateView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+}
+
+- (OTAcceleratorSession *)sessionOfOTScreenSharer:(OTScreenSharer *)screenSharer {
+    return [(AppDelegate*)[[UIApplication sharedApplication] delegate] getSharedAcceleratorSession];
 }
 
 @end
