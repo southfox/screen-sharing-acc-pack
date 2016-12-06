@@ -5,7 +5,7 @@
 //
 
 #import "AppDelegate.h"
-#import <OTAcceleratorPackUtil/OTAcceleratorPackUtil.h>
+#import "OTAcceleratorSession.h"
 
 @interface AppDelegate ()
 

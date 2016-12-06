@@ -4,7 +4,7 @@
 //  Copyright © 2016 Tokbox, Inc. All rights reserved.
 //
 
-#import <OTAcceleratorPackUtil/OTAcceleratorPackUtil.h>
+#import "OTAcceleratorSession.h"
 #import <OTKAnalytics/OTKLogger.h>
 #import "OTScreenSharer.h"
 

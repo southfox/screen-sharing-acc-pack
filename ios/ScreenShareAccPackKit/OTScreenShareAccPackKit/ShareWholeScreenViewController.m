@@ -9,7 +9,7 @@
 #import "ShareWholeScreenViewController.h"
 #import "ColorViewController.h"
 #import "AppDelegate.h"
-#import <OTScreenShareKit/OTScreenShareKit.h>
+#import "OTScreenSharer.h"
 
 @interface ShareWholeScreenViewController () <OTScreenShareDataSource>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

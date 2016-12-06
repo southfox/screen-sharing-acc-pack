@@ -5,7 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <OTAcceleratorPackUtil/OTAcceleratorPackUtil.h>
+#import "OTAcceleratorSession.h"
 
 typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
     OTScreenShareSignalSessionDidConnect = 0,

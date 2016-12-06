@@ -8,7 +8,7 @@
 
 #import "ReceiveScreenViewController.h"
 #import "AppDelegate.h"
-#import <OTScreenShareKit/OTScreenShareKit.h>
+#import "OTScreenSharer.h"
 
 @interface ReceiveScreenViewController () <OTScreenShareDataSource>
 @property (nonatomic) OTScreenSharer *screenSharer;
