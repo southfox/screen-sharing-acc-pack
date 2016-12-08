@@ -8,26 +8,21 @@
 #import "OTAcceleratorSession.h"
 
 typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
-    OTScreenShareSignalSessionDidConnect = 0,
-    OTScreenShareSignalSessionDidDisconnect,
-    OTScreenShareSignalSessionDidFail,
-    OTScreenShareSignalSessionStreamCreated,
-    OTScreenShareSignalSessionStreamDestroyed,
-    OTScreenShareSignalSessionDidBeginReconnecting,
-    OTScreenShareSignalSessionDidReconnect,
-    OTScreenShareSignalPublisherDidFail,
-    OTScreenShareSignalPublisherStreamCreated,
-    OTScreenShareSignalPublisherStreamDestroyed,
-    OTScreenShareSignalSubscriberDidConnect,
-    OTScreenShareSignalSubscriberDidFail,
-    OTScreenShareSignalSubscriberVideoDisabledByPublisher,
-    OTScreenShareSignalSubscriberVideoDisabledBySubscriber,
-    OTScreenShareSignalSubscriberVideoDisabledByBadQuality,
-    OTScreenShareSignalSubscriberVideoEnabledByPublisher,
-    OTScreenShareSignalSubscriberVideoEnabledBySubscriber,
-    OTScreenShareSignalSubscriberVideoEnabledByGoodQuality,
-    OTScreenShareSignalSubscriberVideoDisableWarning,
-    OTScreenShareSignalSubscriberVideoDisableWarningLifted,
+    OTScreenSharePublisherCreated = 0,
+    OTScreenSharePublisherDestroyed,
+    OTScreenShareSubscriberCreated,
+    OTScreenShareSubscriberDestroyed,
+    OTScreenShareSubscriberVideoDisabledByPublisher,
+    OTScreenShareSubscriberVideoDisabledBySubscriber,
+    OTScreenShareSubscriberVideoDisabledByBadQuality,
+    OTScreenShareSubscriberVideoEnabledByPublisher,
+    OTScreenShareSubscriberVideoEnabledBySubscriber,
+    OTScreenShareSubscriberVideoEnabledByGoodQuality,
+    OTScreenShareSubscriberVideoDisableWarning,
+    OTScreenShareSubscriberVideoDisableWarningLifted,
+    OTScreenShareError,
+    OTScreenShareSessionDidBeginReconnecting,
+    OTScreenShareSessionDidReconnect
 };
 
 typedef NS_ENUM(NSInteger, OTScreenShareVideoViewContentMode) {
@@ -65,19 +60,11 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (weak, nonatomic) id<OTScreenShareDelegate> delegate;
 
 /**
- *  Initialize a new `OTScreenSharer` instsance.
- *
- *  @return A new `OTScreenSharer` instsance.
- */
-- (instancetype)initWithDataSource:(id<OTScreenShareDataSource>)dataSource;
-
-/**
  *  Initialize a new `OTScreenSharer` instsance with a publisher name.
  *
  *  @return A new `OTScreenSharer` instsance.
  */
-- (instancetype)initWithName:(NSString *)name
-                  dataSource:(id<OTScreenShareDataSource>)dataSource;
+- (instancetype)initWithName:(NSString *)name;
 
 /**
  *  A boolean value that indicates whether the specified UIView is sharing.
@@ -89,18 +76,6 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  If not specified, the value will be "system name-name specified by Setting", e.g. @"iOS-MyiPhone"
  */
 @property (nonatomic) NSString *name;
-
-/**
- *  Registers to the shared session: [OTAcceleratorSession] and perform publishing/subscribing automatically with a given UIView.
- *
- *  @param view The UIView to be shared
- *
- *  @return An error to indicate whether it connects successfully, non-nil if it fails.
- *
- *  @discussion Given an instance of UIView, it will publish a stream to OpenTok cloud as the video source. 
- *  If nil, the screen sharer is able to subscribe a audio/video stream automatically.
- */
-- (NSError *)connectWithView:(UIView *)view;
 
 /**
  *  An alternative connect method with a completion block handler.

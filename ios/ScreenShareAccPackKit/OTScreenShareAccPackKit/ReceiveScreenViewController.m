@@ -22,17 +22,18 @@
     UIBarButtonItem *previewBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Navigate" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToOtherViews)];
     self.navigationItem.rightBarButtonItem = previewBarButtonItem;
     
-    self.screenSharer = [[OTScreenSharer alloc] initWithDataSource:self];
+    self.screenSharer = [[OTScreenSharer alloc] init];
+    self.screenSharer.dataSource = self;
     [self.screenSharer connectWithView:nil
                          handler:^(OTScreenShareSignal signal, NSError *error) {
                              
                              if (!error) {
                                  
-                                 if (signal == OTScreenShareSignalSessionDidConnect) {
+                                 if (signal == OTScreenSharePublisherCreated) {
                                      self.screenSharer.publishAudio = NO;
                                      self.screenSharer.subscribeToAudio = NO;
                                  }
-                                 else if (signal == OTScreenShareSignalSubscriberDidConnect) {
+                                 else if (signal == OTScreenShareSubscriberCreated) {
                                      
                                      [self.screenSharer.subscriberView removeFromSuperview];
                                      self.screenSharer.subscriberView.frame = self.view.bounds;
