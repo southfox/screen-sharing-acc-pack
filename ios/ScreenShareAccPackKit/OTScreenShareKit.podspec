@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ios/ScreenShareAccPackKit/OTScreenShareKit/ScreenShare/**/*'
 
-  s.dependency 'OTAcceleratorPackUtil', '~> 2.0.0-beta2'
+  s.dependency 'OTAcceleratorPackUtil', '~> 2.0.0-beta4'
 end

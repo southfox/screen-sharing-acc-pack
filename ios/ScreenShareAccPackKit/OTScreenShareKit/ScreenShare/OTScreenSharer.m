@@ -11,7 +11,7 @@
 #import "OTScreenSharer_Private.h"
 
 static NSString * const kLogComponentIdentifier = @"screenSharingAccPack";
-static NSString * const KLogClientVersion = @"ios-vsol-1.1.3";
+static NSString * const KLogClientVersion = @"ios-vsol-2.0.0";
 static NSString * const KLogActionInitialize = @"Init";
 static NSString * const KLogActionStart = @"Start";
 static NSString * const KLogActionEnd = @"End";
@@ -43,9 +43,7 @@ static NSString * const KLogVariationFailure = @"Failure";
 
 @end
 
-@interface OTScreenSharer()<OTSessionDelegate, OTPublisherDelegate, OTSubscriberKitDelegate> {
-    OTStream *liveStream;
-}
+@interface OTScreenSharer()<OTSessionDelegate, OTPublisherDelegate, OTSubscriberKitDelegate, OTVideoViewProtocol>
 
 @property (nonatomic) BOOL isScreenSharing;
 
@@ -54,14 +52,20 @@ static NSString * const KLogVariationFailure = @"Failure";
 @property (nonatomic) OTAcceleratorSession *session;
 @property (nonatomic) OTPublisher *publisher;
 
-@property (nonatomic) UIView *publisherView;
-@property (nonatomic) UIView *subscriberView;
+@property (nonatomic) OTVideoView *publisherView;
+@property (nonatomic) OTVideoView *subscriberView;
 
 @property (strong, nonatomic) OTScreenShareBlock handler;
 
 @end
 
 @implementation OTScreenSharer
+
+- (void)setDataSource:(id<OTScreenShareDataSource>)dataSource {
+    if (!dataSource) return;
+    _dataSource = dataSource;
+    _session = [_dataSource sessionOfOTScreenSharer:self];
+}
 
 - (instancetype)init {
     
@@ -75,12 +79,6 @@ static NSString * const KLogVariationFailure = @"Failure";
         [[SSLoggingWrapper sharedInstance].logger logEventAction:KLogActionInitialize variation:KLogVariationSuccess completion:nil];
     }
     return self;
-}
-
-- (void)setDataSource:(id<OTScreenShareDataSource>)dataSource {
-    if (!dataSource) return;
-    _dataSource = dataSource;
-    _session = [_dataSource sessionOfOTScreenSharer:self];
 }
 
 - (NSError *)connectWithView:(UIView *)view {
@@ -125,27 +123,22 @@ static NSString * const KLogVariationFailure = @"Failure";
                                 variation:KLogVariationAttempt
                                completion:nil];
     if (self.publisher) {
-
+        
         OTError *error = nil;
         [self.publisher.view removeFromSuperview];
         [self.session unpublish:self.publisher error:&error];
         if (error) {
             NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
         }
+        
+        [self.publisherView clean];
         self.publisher = nil;
         self.publisherView = nil;
     }
 
     if (self.subscriber) {
 
-        OTError *error = nil;
-        [self.subscriber.view removeFromSuperview];
-        [self.session unsubscribe:self.subscriber error:&error];
-        if (error) {
-            NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
-        }
-        self.subscriber = nil;
-        self.subscriberView = nil;
+        [self cleanupSubscriber];
     }
 
     NSError *disconnectError = [self.session deregisterWithAccePack:self];
@@ -175,10 +168,6 @@ static NSString * const KLogVariationFailure = @"Failure";
     if (self.handler) {
         self.handler(signal, error);
     }
-
-    if (self.delegate) {
-        [self.delegate screenShareWithSignal:signal error:error];
-    }
 }
 
 - (void) sessionDidConnect:(OTSession *)session {
@@ -186,10 +175,6 @@ static NSString * const KLogVariationFailure = @"Failure";
     [[SSLoggingWrapper sharedInstance].logger setSessionId:session.sessionId connectionId:session.connection.connectionId partnerId:@([self.session.apiKey integerValue])];
 
     if (!self.publisher) {
-        
-        if (!self.name) {
-            self.name = [NSString stringWithFormat:@"%@-%@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].name];
-        }
         self.publisher = [[OTPublisher alloc] initWithDelegate:self
                                                           name:self.name
                                                     audioTrack:YES
@@ -208,6 +193,10 @@ static NSString * const KLogVariationFailure = @"Failure";
     }
     else {
         self.isScreenSharing = YES;
+        if (!self.publisherView) {
+            self.publisherView = [OTVideoView defaultPlaceHolderImageWithPublisher:self.publisher];
+            self.publisherView.delegate = self;
+        }
         [self notifiyAllWithSignal:OTScreenSharePublisherCreated
                              error:nil];
     }
@@ -223,29 +212,27 @@ static NSString * const KLogVariationFailure = @"Failure";
     // we always subscribe one stream for this acc pack
     // please see - subscribeToStreamWithName: to switch subscription
     if (self.subscriber) {
-        NSError *unsubscribeError;
-        [self.session unsubscribe:self.subscriber error:&unsubscribeError];
-        if (unsubscribeError) {
-            NSLog(@"%@", unsubscribeError);
-        }
+        [self cleanupSubscriber];
     }
     
     OTError *subscrciberError;
     self.subscriber = [[OTSubscriber alloc] initWithStream:stream delegate:self];
-    if (self.subscriberVideoContentMode == OTScreenShareVideoViewFit) {
+    if (self.subscriberVideoContentMode == OTVideoViewFit) {
         self.subscriber.viewScaleBehavior = OTVideoViewScaleBehaviorFit;
     }
     else {
         self.subscriber.viewScaleBehavior = OTVideoViewScaleBehaviorFill;
     }
     [self.session subscribe:self.subscriber error:&subscrciberError];
+    [self notifiyAllWithSignal:OTScreenShareSubscriberCreated error:subscrciberError];
 }
 
 - (void) session:(OTSession *)session streamDestroyed:(OTStream *)stream {
 
     if (self.subscriber.stream && [self.subscriber.stream.streamId isEqualToString:stream.streamId]) {
-        [self.subscriber.view removeFromSuperview];
-        self.subscriber = nil;
+        [self cleanupSubscriber];
+        [self notifiyAllWithSignal:OTScreenShareSubscriberDestroyed
+                             error:nil];
     }
 }
 
@@ -276,14 +263,9 @@ static NSString * const KLogVariationFailure = @"Failure";
 #pragma mark - OTSubscriberKitDelegate
 -(void) subscriberDidConnectToStream:(OTSubscriberKit*)subscriber {
     if (subscriber == self.subscriber) {
+        _subscriberView = [OTVideoView defaultPlaceHolderImageWithSubscriber:self.subscriber];
+        _subscriberView.delegate = self;
         [self notifiyAllWithSignal:OTScreenShareSubscriberCreated
-                             error:nil];
-    }
-}
-
-- (void) subscriberDidDisconnectFromStream:(OTSubscriberKit *)subscriber {
-    if (subscriber == self.subscriber) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberDestroyed
                              error:nil];
     }
 }
@@ -345,13 +327,6 @@ static NSString * const KLogVariationFailure = @"Failure";
 }
 
 #pragma mark - Setters and Getters
-- (UIView *)subscriberView {
-    return _subscriber.view;
-}
-
-- (UIView *)publisherView {
-    return _publisher.view;
-}
 
 - (BOOL)isRemoteAudioAvailable {
     if (!_subscriber) return NO;
@@ -410,17 +385,39 @@ static NSString * const KLogVariationFailure = @"Failure";
     return self.subscriber.stream.videoDimensions;
 }
 
-- (void)setSubscriberVideoContentMode:(OTScreenShareVideoViewContentMode)subscriberVideoContentMode {
+- (void)setSubscriberVideoContentMode:(OTVideoViewContentMode)subscriberVideoContentMode {
+    
     _subscriberVideoContentMode = subscriberVideoContentMode;
     
     if (self.subscriber) {
-        if (_subscriberVideoContentMode == OTScreenShareVideoViewFit) {
+        if (_subscriberVideoContentMode == OTVideoViewFit) {
             self.subscriber.viewScaleBehavior = OTVideoViewScaleBehaviorFit;
         }
         else {
             self.subscriber.viewScaleBehavior = OTVideoViewScaleBehaviorFill;
         }
     }
+}
+
+- (void)cleanupSubscriber {
+    NSError *unsubscribeError;
+    [self.session unsubscribe:self.subscriber error:&unsubscribeError];
+    if (unsubscribeError) {
+        NSLog(@"%@", unsubscribeError);
+    }
+    [self.subscriber.view removeFromSuperview];
+    [self.subscriberView clean];
+    self.subscriber = nil;
+    self.subscriberView = nil;
+}
+
+#pragma mark - OTVideoViewProtocol
+- (void)placeHolderImageViewDidShowOnVideoView:(OTVideoView *)videoView {
+    
+}
+
+- (void)placeHolderImageViewDidDismissOnVideoView:(OTVideoView *)videoView {
+    
 }
 
 #pragma mark - advanced

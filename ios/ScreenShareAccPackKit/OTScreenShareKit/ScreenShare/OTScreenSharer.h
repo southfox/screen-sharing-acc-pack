@@ -6,11 +6,13 @@
 
 #import <UIKit/UIKit.h>
 #import "OTAcceleratorSession.h"
+#import "OTOneToOneCommunicator.h"
 
 typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
     OTScreenSharePublisherCreated = 0,
     OTScreenSharePublisherDestroyed,
     OTScreenShareSubscriberCreated,
+    OTScreenShareSubscriberReady,
     OTScreenShareSubscriberDestroyed,
     OTScreenShareSubscriberVideoDisabledByPublisher,
     OTScreenShareSubscriberVideoDisabledBySubscriber,
@@ -25,22 +27,12 @@ typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
     OTScreenShareSessionDidReconnect
 };
 
-typedef NS_ENUM(NSInteger, OTScreenShareVideoViewContentMode) {
-    OTScreenShareVideoViewFill,
-    OTScreenShareVideoViewFit
-};
-
 typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 
 @class OTScreenSharer;
 
 @protocol OTScreenShareDataSource <NSObject>
 - (OTAcceleratorSession *)sessionOfOTScreenSharer:(OTScreenSharer *)screenSharer;
-@end
-
-@protocol OTScreenShareDelegate <NSObject>
-- (void)screenShareWithSignal:(OTScreenShareSignal)signal
-                        error:(NSError *)error;
 @end
 
 @interface OTScreenSharer : NSObject
@@ -53,13 +45,6 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 @property (weak, nonatomic) id<OTScreenShareDataSource> dataSource;
 
 /**
- *  The object that acts as the delegate of the screen sharer.
- *
- *  The delegate must adopt the OTScreenShareDelegate protocol. The delegate is not retained.
- */
-@property (weak, nonatomic) id<OTScreenShareDelegate> delegate;
-
-/**
  *  Initialize a new `OTScreenSharer` instsance with a publisher name.
  *
  *  @return A new `OTScreenSharer` instsance.
@@ -67,15 +52,10 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 - (instancetype)initWithName:(NSString *)name;
 
 /**
- *  A boolean value that indicates whether the specified UIView is sharing.
- */
-@property (readonly, nonatomic) BOOL isScreenSharing;
-
-/**
  *  A string that represents the current communicator.
  *  If not specified, the value will be "system name-name specified by Setting", e.g. @"iOS-MyiPhone"
  */
-@property (nonatomic) NSString *name;
+@property (readonly, nonatomic) NSString *name;
 
 /**
  *  An alternative connect method with a completion block handler.
@@ -98,13 +78,18 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  */
 - (void)updateView:(UIView *)view;
 
+/**
+ *  A boolean value that indicates whether the specified UIView is sharing.
+ */
+@property (readonly, nonatomic) BOOL isScreenSharing;
+
 #pragma mark - subscriber
 /**
  *  The scaling of the rendered video, as defined by the <OTScreenShareVideoViewContentMode> enum.
  *  The default value is OTVideoViewScaleBehaviorFill. 
  *  Set it to OTVideoViewScaleBehaviorFit to have the video shrink, as needed, so that the entire video is visible(with pillarboxing).
  */
-@property (nonatomic) OTScreenShareVideoViewContentMode subscriberVideoContentMode;
+@property (nonatomic) OTVideoViewContentMode subscriberVideoContentMode;
 
 /**
  *  The current dimensions of the video media track on the subscriber's stream.
@@ -127,7 +112,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *
  *  The subscriber view is available after OTScreenShareSignalSubscriberDidConnect being signaled.
  */
-@property (readonly, nonatomic) UIView *subscriberView;
+@property (readonly, nonatomic) OTVideoView *subscriberView;
 
 /**
  *  A boolean value to indicate whether the screen sharer subscripts to audio.
@@ -145,7 +130,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *
  *  The publisher view is available after OTScreenShareSignalSessionDidConnect being signaled.
  */
-@property (readonly, nonatomic) UIView *publisherView;
+@property (readonly, nonatomic) OTVideoView *publisherView;
 
 /**
  *  A boolean value to indicate whether to publish audio.

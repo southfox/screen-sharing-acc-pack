@@ -87,16 +87,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUp-6L-XGK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SBI-UP-78V" firstAttribute="top" secondItem="jUp-6L-XGK" secondAttribute="bottom" constant="67" id="1nb-vX-l8c"/>
+                            <constraint firstAttribute="trailing" secondItem="jUp-6L-XGK" secondAttribute="trailing" id="F6E-l0-V5a"/>
                             <constraint firstItem="jUp-6L-XGK" firstAttribute="leading" secondItem="Jjg-f5-owG" secondAttribute="leading" id="b9t-xK-d3C"/>
                             <constraint firstItem="jUp-6L-XGK" firstAttribute="top" secondItem="Jjg-f5-owG" secondAttribute="top" id="lEo-KA-cXv"/>
-                            <constraint firstAttribute="trailing" secondItem="jUp-6L-XGK" secondAttribute="trailing" constant="-225" id="oAC-fY-Rt6"/>
+                            <constraint firstItem="SBI-UP-78V" firstAttribute="top" secondItem="jUp-6L-XGK" secondAttribute="bottom" id="oKh-Gx-jvp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -139,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRg-Mc-CN2">
-                                <rect key="frame" x="271" y="285" width="58" height="30"/>
+                                <rect key="frame" x="158.5" y="318.5" width="58" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Dismiss">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,8 +152,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rRg-Mc-CN2" firstAttribute="centerX" secondItem="pR6-BB-cYd" secondAttribute="centerX" constant="112.5" id="Ncm-AH-DT7"/>
-                            <constraint firstItem="rRg-Mc-CN2" firstAttribute="centerY" secondItem="pR6-BB-cYd" secondAttribute="centerY" constant="-33.5" id="jRN-cx-kOb"/>
+                            <constraint firstItem="rRg-Mc-CN2" firstAttribute="centerX" secondItem="pR6-BB-cYd" secondAttribute="centerX" id="nPz-D2-IUo"/>
+                            <constraint firstItem="rRg-Mc-CN2" firstAttribute="centerY" secondItem="pR6-BB-cYd" secondAttribute="centerY" id="x0w-It-STf"/>
                         </constraints>
                     </view>
                 </viewController>

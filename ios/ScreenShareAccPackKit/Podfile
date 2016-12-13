@@ -1,7 +1,7 @@
 platform :ios, '8.0'
 
 target 'OTScreenShareKit' do
-    pod 'OTAcceleratorPackUtil', '~> 2.0.0-beta2'
+    pod 'OTAcceleratorPackUtil', '~> 2.0.0-beta3'
 end
 
 target 'OTScreenShareKitTests' do

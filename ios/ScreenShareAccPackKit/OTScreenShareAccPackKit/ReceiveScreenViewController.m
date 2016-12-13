@@ -57,11 +57,11 @@
         
         if (self.screenSharer.isScreenSharing) {
             
-            if (self.screenSharer.subscriberVideoContentMode == OTScreenShareVideoViewFit) {
-                self.screenSharer.subscriberVideoContentMode = OTScreenShareVideoViewFill;
+            if (self.screenSharer.subscriberVideoContentMode == OTVideoViewFit) {
+                self.screenSharer.subscriberVideoContentMode = OTVideoViewFill;
             }
             else {
-                self.screenSharer.subscriberVideoContentMode = OTScreenShareVideoViewFit;
+                self.screenSharer.subscriberVideoContentMode = OTVideoViewFit;
             }
         }
     }]];
