@@ -7,8 +7,7 @@
 #import "OTAcceleratorSession.h"
 #import <OTKAnalytics/OTKLogger.h>
 #import "OTScreenSharer.h"
-
-#import "OTScreenSharer_Private.h"
+#import "OTScreenCapture.h"
 
 static NSString * const kLogComponentIdentifier = @"screenSharingAccPack";
 static NSString * const KLogClientVersion = @"ios-vsol-2.0.0";
@@ -51,6 +50,7 @@ static NSString * const KLogVariationFailure = @"Failure";
 @property (nonatomic) OTSubscriber *subscriber;
 @property (nonatomic) OTAcceleratorSession *session;
 @property (nonatomic) OTPublisher *publisher;
+@property (nonatomic) OTScreenCapture *screenCapture;
 
 @property (nonatomic) OTVideoView *publisherView;
 @property (nonatomic) OTVideoView *subscriberView;
