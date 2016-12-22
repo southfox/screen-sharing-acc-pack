@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A0565F6F1DF7807C001F9032 /* OTScreenCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A0565F6A1DF7807C001F9032 /* OTScreenCapture.m */; };
-		A0565F701DF7807C001F9032 /* OTScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0565F6C1DF7807C001F9032 /* OTScreenSharer.m */; };
+		A000CAE61E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE11E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m */; };
+		A000CAE71E0C328C00CF4DB0 /* OTScreenCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE31E0C328C00CF4DB0 /* OTScreenCapture.m */; };
+		A000CAE81E0C328C00CF4DB0 /* OTScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE51E0C328C00CF4DB0 /* OTScreenSharer.m */; };
 		A058350C1D2F4BAD00E484FB /* ShareWholeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A058350B1D2F4BAD00E484FB /* ShareWholeScreenViewController.m */; };
 		A058350F1D2F4E4700E484FB /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A058350E1D2F4E4700E484FB /* ColorViewController.m */; };
-		A08B325C1DFFCDF700530916 /* OTMultiPartyScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A08B325B1DFFCDF700530916 /* OTMultiPartyScreenSharer.m */; };
 		A08B325F1E010D9500530916 /* ShareWholeScreenMultipartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A08B325E1E010D9500530916 /* ShareWholeScreenMultipartyViewController.m */; };
 		A0CFE1731D25BFB800D8449B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CFE1681D25BFB800D8449B /* AppDelegate.m */; };
 		A0CFE1741D25BFB800D8449B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0CFE1691D25BFB800D8449B /* Assets.xcassets */; };
@@ -50,16 +50,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A0565F691DF7807C001F9032 /* OTScreenCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTScreenCapture.h; sourceTree = "<group>"; };
-		A0565F6A1DF7807C001F9032 /* OTScreenCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTScreenCapture.m; sourceTree = "<group>"; };
-		A0565F6B1DF7807C001F9032 /* OTScreenSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTScreenSharer.h; sourceTree = "<group>"; };
-		A0565F6C1DF7807C001F9032 /* OTScreenSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTScreenSharer.m; sourceTree = "<group>"; };
+		A000CAE01E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMultiPartyScreenSharer.h; sourceTree = "<group>"; };
+		A000CAE11E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMultiPartyScreenSharer.m; sourceTree = "<group>"; };
+		A000CAE21E0C328C00CF4DB0 /* OTScreenCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTScreenCapture.h; sourceTree = "<group>"; };
+		A000CAE31E0C328C00CF4DB0 /* OTScreenCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTScreenCapture.m; sourceTree = "<group>"; };
+		A000CAE41E0C328C00CF4DB0 /* OTScreenSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTScreenSharer.h; sourceTree = "<group>"; };
+		A000CAE51E0C328C00CF4DB0 /* OTScreenSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTScreenSharer.m; sourceTree = "<group>"; };
 		A058350A1D2F4BAD00E484FB /* ShareWholeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWholeScreenViewController.h; sourceTree = "<group>"; };
 		A058350B1D2F4BAD00E484FB /* ShareWholeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWholeScreenViewController.m; sourceTree = "<group>"; };
 		A058350D1D2F4E4700E484FB /* ColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
 		A058350E1D2F4E4700E484FB /* ColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
-		A08B325A1DFFCDF700530916 /* OTMultiPartyScreenSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMultiPartyScreenSharer.h; sourceTree = "<group>"; };
-		A08B325B1DFFCDF700530916 /* OTMultiPartyScreenSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMultiPartyScreenSharer.m; sourceTree = "<group>"; };
 		A08B325D1E010D9500530916 /* ShareWholeScreenMultipartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareWholeScreenMultipartyViewController.h; sourceTree = "<group>"; };
 		A08B325E1E010D9500530916 /* ShareWholeScreenMultipartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareWholeScreenMultipartyViewController.m; sourceTree = "<group>"; };
 		A09A4AA11CD02A800024C349 /* OTScreenShareKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OTScreenShareKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,22 +102,14 @@
 		A0565F661DF7807C001F9032 /* OTScreenShareKit */ = {
 			isa = PBXGroup;
 			children = (
-				A0565F681DF7807C001F9032 /* ScreenShare */,
+				A000CAE01E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.h */,
+				A000CAE11E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m */,
+				A000CAE21E0C328C00CF4DB0 /* OTScreenCapture.h */,
+				A000CAE31E0C328C00CF4DB0 /* OTScreenCapture.m */,
+				A000CAE41E0C328C00CF4DB0 /* OTScreenSharer.h */,
+				A000CAE51E0C328C00CF4DB0 /* OTScreenSharer.m */,
 			);
 			path = OTScreenShareKit;
-			sourceTree = "<group>";
-		};
-		A0565F681DF7807C001F9032 /* ScreenShare */ = {
-			isa = PBXGroup;
-			children = (
-				A0565F691DF7807C001F9032 /* OTScreenCapture.h */,
-				A0565F6A1DF7807C001F9032 /* OTScreenCapture.m */,
-				A0565F6B1DF7807C001F9032 /* OTScreenSharer.h */,
-				A0565F6C1DF7807C001F9032 /* OTScreenSharer.m */,
-				A08B325A1DFFCDF700530916 /* OTMultiPartyScreenSharer.h */,
-				A08B325B1DFFCDF700530916 /* OTMultiPartyScreenSharer.m */,
-			);
-			path = ScreenShare;
 			sourceTree = "<group>";
 		};
 		A09A4A981CD02A800024C349 = {
@@ -279,16 +271,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0565F6F1DF7807C001F9032 /* OTScreenCapture.m in Sources */,
+				A000CAE61E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m in Sources */,
 				A0CFE1781D25BFB800D8449B /* main.m in Sources */,
 				A0FEAC071D73BBDE000BDDA4 /* CHANGELOG.md in Sources */,
 				A08B325F1E010D9500530916 /* ShareWholeScreenMultipartyViewController.m in Sources */,
-				A0565F701DF7807C001F9032 /* OTScreenSharer.m in Sources */,
+				A000CAE71E0C328C00CF4DB0 /* OTScreenCapture.m in Sources */,
 				A0F2921A1D8667DF00BC6A53 /* ReceiveScreenViewController.m in Sources */,
 				A058350F1D2F4E4700E484FB /* ColorViewController.m in Sources */,
 				A058350C1D2F4BAD00E484FB /* ShareWholeScreenViewController.m in Sources */,
 				A0CFE1731D25BFB800D8449B /* AppDelegate.m in Sources */,
-				A08B325C1DFFCDF700530916 /* OTMultiPartyScreenSharer.m in Sources */,
+				A000CAE81E0C328C00CF4DB0 /* OTScreenSharer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
