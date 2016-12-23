@@ -7,34 +7,12 @@
 #import <Foundation/Foundation.h>
 #import "OTAcceleratorSession.h"
 #import "OTVideoView.h"
-
-typedef NS_ENUM(NSUInteger, OTMultiPartyScreenSharerSignal) {
-    OTPublisherCreated,
-    OTPublisherDestroyed,
-    OTSubscriberCreated,
-    OTSubscriberDestroyed,
-    OTSubscriberVideoDisabledByPublisher,
-    OTSubscriberVideoDisabledBySubscriber,
-    OTSubscriberVideoDisabledByBadQuality,
-    OTSubscriberVideoEnabledByPublisher,
-    OTSubscriberVideoEnabledBySubscriber,
-    OTSubscriberVideoEnabledByGoodQuality,
-    OTSubscriberVideoDisableWarning,
-    OTSubscriberVideoDisableWarningLifted,
-    OTMultiPartyScreenSharerError,
-    OTSessionDidBeginReconnecting,
-    OTSessionDidReconnect
-};
-
-typedef NS_ENUM(NSInteger, OTVideoViewContentMode) {
-    OTVideoViewFill,
-    OTVideoViewFit
-};
+#import "OTCommonCommunicator.h"
 
 @class OTMultiPartyScreenSharer;
 @class OTMultiPartyScreenShareRemote;
 
-typedef void (^OTMultiPartyScreenSharerBlock)(OTMultiPartyScreenSharerSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error);
+typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error);
 
 @protocol OTMultiPartyScreenSharerDataSource <NSObject>
 - (OTAcceleratorSession *)sessionOfOTMultiPartyScreenSharer:(OTMultiPartyScreenSharer *)multiPartyScreenSharer;

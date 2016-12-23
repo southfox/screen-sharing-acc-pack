@@ -8,27 +8,6 @@
 #import "OTAcceleratorSession.h"
 #import "OTOneToOneCommunicator.h"
 
-typedef NS_ENUM(NSUInteger, OTScreenShareSignal) {
-    OTScreenSharePublisherCreated = 0,
-    OTScreenSharePublisherDestroyed,
-    OTScreenShareSubscriberCreated,
-    OTScreenShareSubscriberReady,
-    OTScreenShareSubscriberDestroyed,
-    OTScreenShareSubscriberVideoDisabledByPublisher,
-    OTScreenShareSubscriberVideoDisabledBySubscriber,
-    OTScreenShareSubscriberVideoDisabledByBadQuality,
-    OTScreenShareSubscriberVideoEnabledByPublisher,
-    OTScreenShareSubscriberVideoEnabledBySubscriber,
-    OTScreenShareSubscriberVideoEnabledByGoodQuality,
-    OTScreenShareSubscriberVideoDisableWarning,
-    OTScreenShareSubscriberVideoDisableWarningLifted,
-    OTScreenShareError,
-    OTScreenShareSessionDidBeginReconnecting,
-    OTScreenShareSessionDidReconnect
-};
-
-typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
-
 @class OTScreenSharer;
 
 @protocol OTScreenShareDataSource <NSObject>
@@ -64,7 +43,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
  *  @param handler The completion handler to call with the change.
  */
 - (void)connectWithView:(UIView *)view
-                handler:(OTScreenShareBlock)handler;
+                handler:(OTCommunicatorBlock)handler;
 
 /**
  *  De-registers to the shared session: [OTAcceleratorSession] and stops publishing/subscriber.
@@ -85,7 +64,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 
 #pragma mark - subscriber
 /**
- *  The scaling of the rendered video, as defined by the <OTScreenShareVideoViewContentMode> enum.
+ *  The scaling of the rendered video, as defined by the <OTVideoViewContentMode> enum.
  *  The default value is OTVideoViewScaleBehaviorFill. 
  *  Set it to OTVideoViewScaleBehaviorFit to have the video shrink, as needed, so that the entire video is visible(with pillarboxing).
  */
@@ -110,7 +89,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 /**
  *  The view containing a playback buffer for associated video data. Add this view to your view heirarchy to display a video stream.
  *
- *  The subscriber view is available after OTScreenShareSignalSubscriberDidConnect being signaled.
+ *  The subscriber view is available after OTSubscriberDidConnect being signaled.
  */
 @property (readonly, nonatomic) OTVideoView *subscriberView;
 
@@ -128,7 +107,7 @@ typedef void (^OTScreenShareBlock)(OTScreenShareSignal signal, NSError *error);
 /**
  *  The view for this publisher. If this view becomes visible, it will display a preview of the active screen share feed.
  *
- *  The publisher view is available after OTScreenShareSignalSessionDidConnect being signaled.
+ *  The publisher view is available after OTSessionDidConnect being signaled.
  */
 @property (readonly, nonatomic) OTVideoView *publisherView;
 

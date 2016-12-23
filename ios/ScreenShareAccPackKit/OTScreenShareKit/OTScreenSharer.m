@@ -55,7 +55,7 @@ static NSString * const KLogVariationFailure = @"Failure";
 @property (nonatomic) OTVideoView *publisherView;
 @property (nonatomic) OTVideoView *subscriberView;
 
-@property (strong, nonatomic) OTScreenShareBlock handler;
+@property (strong, nonatomic) OTCommunicatorBlock handler;
 
 @end
 
@@ -105,14 +105,14 @@ static NSString * const KLogVariationFailure = @"Failure";
 }
 
 - (void)connectWithView:(UIView *)view
-                handler:(OTScreenShareBlock)handler {
+                handler:(OTCommunicatorBlock)handler {
     
     if (!handler) return;
     
     self.handler = handler;
     NSError *error = [self connectWithView:view];
     if (error) {
-        self.handler(OTScreenShareError, error);
+        self.handler(OTCommunicationError, error);
     }
 }
 
@@ -163,7 +163,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     }
 }
 
-- (void)notifiyAllWithSignal:(OTScreenShareSignal)signal error:(NSError *)error {
+- (void)notifiyAllWithSignal:(OTCommunicationSignal)signal error:(NSError *)error {
 
     if (self.handler) {
         self.handler(signal, error);
@@ -188,7 +188,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     OTError *error;
     [self.session publish:self.publisher error:&error];
     if (error) {
-        [self notifiyAllWithSignal:OTScreenShareError
+        [self notifiyAllWithSignal:OTCommunicationError
                              error:error];
     }
     else {
@@ -197,13 +197,13 @@ static NSString * const KLogVariationFailure = @"Failure";
             self.publisherView = [OTVideoView defaultPlaceHolderImageWithPublisher:self.publisher];
             self.publisherView.delegate = self;
         }
-        [self notifiyAllWithSignal:OTScreenSharePublisherCreated
+        [self notifiyAllWithSignal:OTPublisherCreated
                              error:nil];
     }
 }
 
 - (void) sessionDidDisconnect:(OTSession *)session {
-    [self notifiyAllWithSignal:OTScreenSharePublisherDestroyed
+    [self notifiyAllWithSignal:OTPublisherDestroyed
                          error:nil];
 }
 
@@ -224,30 +224,30 @@ static NSString * const KLogVariationFailure = @"Failure";
         self.subscriber.viewScaleBehavior = OTVideoViewScaleBehaviorFill;
     }
     [self.session subscribe:self.subscriber error:&subscrciberError];
-    [self notifiyAllWithSignal:OTScreenShareSubscriberCreated error:subscrciberError];
+    [self notifiyAllWithSignal:OTSubscriberCreated error:subscrciberError];
 }
 
 - (void) session:(OTSession *)session streamDestroyed:(OTStream *)stream {
 
     if (self.subscriber.stream && [self.subscriber.stream.streamId isEqualToString:stream.streamId]) {
         [self cleanupSubscriber];
-        [self notifiyAllWithSignal:OTScreenShareSubscriberDestroyed
+        [self notifiyAllWithSignal:OTSubscriberDestroyed
                              error:nil];
     }
 }
 
 - (void)session:(OTSession *)session didFailWithError:(OTError *)error {
-    [self notifiyAllWithSignal:OTScreenShareError
+    [self notifiyAllWithSignal:OTCommunicationError
                          error:error];
 }
 
 - (void)sessionDidBeginReconnecting:(OTSession *)session {
-    [self notifiyAllWithSignal:OTScreenShareSessionDidBeginReconnecting
+    [self notifiyAllWithSignal:OTSessionDidBeginReconnecting
                          error:nil];
 }
 
 - (void)sessionDidReconnect:(OTSession *)session {
-    [self notifiyAllWithSignal:OTScreenShareSessionDidReconnect
+    [self notifiyAllWithSignal:OTSessionDidReconnect
                          error:nil];
 }
 
@@ -255,7 +255,7 @@ static NSString * const KLogVariationFailure = @"Failure";
 
 - (void)publisher:(OTPublisherKit *)publisher didFailWithError:(OTError *)error {
     if (publisher == self.publisher) {
-        [self notifiyAllWithSignal:OTScreenShareError
+        [self notifiyAllWithSignal:OTCommunicationError
                              error:error];
     }
 }
@@ -265,7 +265,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     if (subscriber == self.subscriber) {
         _subscriberView = [OTVideoView defaultPlaceHolderImageWithSubscriber:self.subscriber];
         _subscriberView.delegate = self;
-        [self notifiyAllWithSignal:OTScreenShareSubscriberCreated
+        [self notifiyAllWithSignal:OTSubscriberCreated
                              error:nil];
     }
 }
@@ -274,16 +274,16 @@ static NSString * const KLogVariationFailure = @"Failure";
     if (subscriber != self.subscriber) return;
     
     if (reason == OTSubscriberVideoEventPublisherPropertyChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoDisabledByPublisher
+        [self notifiyAllWithSignal:OTSubscriberVideoDisabledByPublisher
                              error:nil];
     }
     else if (reason == OTSubscriberVideoEventSubscriberPropertyChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoDisabledBySubscriber
+        [self notifiyAllWithSignal:OTSubscriberVideoDisabledBySubscriber
                              error:nil];
     
     }
     else if (reason == OTSubscriberVideoEventQualityChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoDisabledByBadQuality
+        [self notifiyAllWithSignal:OTSubscriberVideoDisabledByBadQuality
                              error:nil];
     }
 }
@@ -292,36 +292,36 @@ static NSString * const KLogVariationFailure = @"Failure";
     if (subscriber != self.subscriber) return;
     
     if (reason == OTSubscriberVideoEventPublisherPropertyChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoEnabledByPublisher
+        [self notifiyAllWithSignal:OTSubscriberVideoEnabledByPublisher
                              error:nil];
     }
     else if (reason == OTSubscriberVideoEventSubscriberPropertyChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoEnabledBySubscriber
+        [self notifiyAllWithSignal:OTSubscriberVideoEnabledBySubscriber
                              error:nil];
     }
     else if (reason == OTSubscriberVideoEventQualityChanged) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoEnabledByGoodQuality
+        [self notifiyAllWithSignal:OTSubscriberVideoEnabledByGoodQuality
                              error:nil];
     }
 }
 
 -(void) subscriberVideoDisableWarning:(OTSubscriber *)subscriber reason:(OTSubscriberVideoEventReason)reason {
     if (subscriber == self.subscriber) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoDisableWarning
+        [self notifiyAllWithSignal:OTSubscriberVideoDisableWarning
                              error:nil];
     }
 }
 
 -(void) subscriberVideoDisableWarningLifted:(OTSubscriberKit *)subscriber reason:(OTSubscriberVideoEventReason)reason {
     if (subscriber == self.subscriber) {
-        [self notifiyAllWithSignal:OTScreenShareSubscriberVideoDisableWarningLifted
+        [self notifiyAllWithSignal:OTSubscriberVideoDisableWarningLifted
                              error:nil];
     }
 }
 
 - (void)subscriber:(OTSubscriberKit *)subscriber didFailWithError:(OTError *)error {
     if (subscriber == self.subscriber) {
-        [self notifiyAllWithSignal:OTScreenShareError
+        [self notifiyAllWithSignal:OTCommunicationError
                              error:error];
     }
 }

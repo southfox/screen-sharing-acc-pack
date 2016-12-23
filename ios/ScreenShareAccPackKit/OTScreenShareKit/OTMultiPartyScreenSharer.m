@@ -188,7 +188,7 @@ static NSString* const KLogVariationFailure = @"Failure";
     self.handler = handler;
     NSError *error = [self connectWithView:view];
     if (error) {
-        self.handler(OTMultiPartyScreenSharerError, nil, error);
+        self.handler(OTCommunicationError, nil, error);
     }
 }
 
@@ -242,7 +242,7 @@ static NSString* const KLogVariationFailure = @"Failure";
     return disconnectError;
 }
 
-- (void)notifiyAllWithSignal:(OTMultiPartyScreenSharerSignal)signal
+- (void)notifiyAllWithSignal:(OTCommunicationSignal)signal
                   subscriber:(OTMultiPartyScreenShareRemote *)subscriber
                        error:(NSError *)error {
     
@@ -272,7 +272,7 @@ static NSString* const KLogVariationFailure = @"Failure";
     OTError *error;
     [self.session publish:self.publisher error:&error];
     if (error) {
-        [self notifiyAllWithSignal:OTMultiPartyScreenSharerError
+        [self notifiyAllWithSignal:OTCommunicationError
                         subscriber:nil
                              error:error];
     }
@@ -320,7 +320,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)session:(OTSession *)session didFailWithError:(OTError *)error {
-    [self notifiyAllWithSignal:OTMultiPartyScreenSharerError
+    [self notifiyAllWithSignal:OTCommunicationError
                     subscriber:nil
                          error:error];
 }
@@ -340,7 +340,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 #pragma mark - OTPublisherDelegate
 - (void)publisher:(OTPublisherKit *)publisher didFailWithError:(OTError *)error {
     if (publisher == self.publisher) {
-        [self notifiyAllWithSignal:OTMultiPartyScreenSharerError
+        [self notifiyAllWithSignal:OTCommunicationError
                         subscriber:nil
                              error:error];
     }
