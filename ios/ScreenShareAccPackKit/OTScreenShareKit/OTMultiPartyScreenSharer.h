@@ -56,6 +56,12 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  */
 - (NSError *)disconnect;
 
+/**
+ *  A boolean value that indicates whether the specified UIView is sharing.
+ */
+@property (readonly, nonatomic) BOOL isCallEnabled;
+
+
 #pragma mark - publisher
 /**
  *  The view for this publisher. If this view becomes visible, it will display a preview of the active camera feed.
@@ -80,6 +86,11 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  *  if the publisher has not yet begun publishing, getting this property returns the preferred camera position.
  */
 @property (nonatomic) AVCaptureDevicePosition cameraPosition;
+
+/**
+ * Container of subscribers: instance of OTMultiPartyScreenShareRemote
+ */
+@property (readonly, nonatomic) NSMutableArray *subscribers;
 
 @end
 
