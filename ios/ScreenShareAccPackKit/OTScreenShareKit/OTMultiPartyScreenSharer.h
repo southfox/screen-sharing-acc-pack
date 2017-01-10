@@ -87,11 +87,6 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  */
 @property (nonatomic) AVCaptureDevicePosition cameraPosition;
 
-/**
- * Container of subscribers: instance of OTMultiPartyScreenShareRemote
- */
-@property (readonly, nonatomic) NSMutableArray *subscribers;
-
 @end
 
 @interface OTMultiPartyScreenShareRemote : NSObject
