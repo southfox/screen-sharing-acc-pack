@@ -7,34 +7,12 @@
 #import <Foundation/Foundation.h>
 #import "OTAcceleratorSession.h"
 #import "OTVideoView.h"
-
-typedef NS_ENUM(NSUInteger, OTMultiPartyScreenSharerSignal) {
-    OTPublisherCreated,
-    OTPublisherDestroyed,
-    OTSubscriberCreated,
-    OTSubscriberDestroyed,
-    OTSubscriberVideoDisabledByPublisher,
-    OTSubscriberVideoDisabledBySubscriber,
-    OTSubscriberVideoDisabledByBadQuality,
-    OTSubscriberVideoEnabledByPublisher,
-    OTSubscriberVideoEnabledBySubscriber,
-    OTSubscriberVideoEnabledByGoodQuality,
-    OTSubscriberVideoDisableWarning,
-    OTSubscriberVideoDisableWarningLifted,
-    OTMultiPartyScreenSharerError,
-    OTSessionDidBeginReconnecting,
-    OTSessionDidReconnect
-};
-
-typedef NS_ENUM(NSInteger, OTVideoViewContentMode) {
-    OTVideoViewFill,
-    OTVideoViewFit
-};
+#import "OTCommonCommunicator.h"
 
 @class OTMultiPartyScreenSharer;
 @class OTMultiPartyScreenShareRemote;
 
-typedef void (^OTMultiPartyScreenSharerBlock)(OTMultiPartyScreenSharerSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error);
+typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error);
 
 @protocol OTMultiPartyScreenSharerDataSource <NSObject>
 - (OTAcceleratorSession *)sessionOfOTMultiPartyScreenSharer:(OTMultiPartyScreenSharer *)multiPartyScreenSharer;
@@ -77,6 +55,12 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTMultiPartyScreenSharerSignal sig
  *  @return An error to indicate whether it disconnects successfully, non-nil if it fails.
  */
 - (NSError *)disconnect;
+
+/**
+ *  A boolean value that indicates whether the specified UIView is sharing.
+ */
+@property (readonly, nonatomic) BOOL isCallEnabled;
+
 
 #pragma mark - publisher
 /**
