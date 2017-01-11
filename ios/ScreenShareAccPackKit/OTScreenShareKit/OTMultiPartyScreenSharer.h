@@ -59,7 +59,7 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
 /**
  *  A boolean value that indicates whether the specified UIView is sharing.
  */
-@property (readonly, nonatomic) BOOL isCallEnabled;
+@property (readonly, nonatomic) BOOL isScreenSharing;
 
 
 #pragma mark - publisher

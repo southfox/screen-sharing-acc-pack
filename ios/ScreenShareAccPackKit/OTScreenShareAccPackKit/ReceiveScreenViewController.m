@@ -25,15 +25,15 @@
     self.screenSharer = [[OTScreenSharer alloc] init];
     self.screenSharer.dataSource = self;
     [self.screenSharer connectWithView:nil
-                         handler:^(OTScreenShareSignal signal, NSError *error) {
+                         handler:^(OTCommunicationSignal signal, NSError *error) {
                              
                              if (!error) {
                                  
-                                 if (signal == OTScreenSharePublisherCreated) {
+                                 if (signal == OTPublisherCreated) {
                                      self.screenSharer.publishAudio = NO;
                                      self.screenSharer.subscribeToAudio = NO;
                                  }
-                                 else if (signal == OTScreenShareSubscriberCreated) {
+                                 else if (signal == OTSubscriberReady) {
                                      
                                      [self.screenSharer.subscriberView removeFromSuperview];
                                      self.screenSharer.subscriberView.frame = self.view.bounds;

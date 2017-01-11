@@ -118,7 +118,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 @end
 
 @interface OTMultiPartyScreenSharer() <OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate, OTVideoViewProtocol>
-@property (nonatomic) BOOL isCallEnabled;
+@property (nonatomic) BOOL isScreenSharing;
 @property (nonatomic) NSString *name;
 @property (nonatomic) OTPublisher *publisher;
 @property (nonatomic) NSMutableArray *subscribers;
@@ -238,7 +238,7 @@ static NSString* const KLogVariationFailure = @"Failure";
                                    completion:nil];
     }
     
-    self.isCallEnabled = NO;
+    self.isScreenSharing = NO;
     return disconnectError;
 }
 
@@ -277,7 +277,7 @@ static NSString* const KLogVariationFailure = @"Failure";
                              error:error];
     }
     else {
-        self.isCallEnabled = YES;
+        self.isScreenSharing = YES;
         if (!self.publisherView) {
             self.publisherView = [OTVideoView defaultPlaceHolderImageWithPublisher:self.publisher];
             self.publisherView.delegate = self;

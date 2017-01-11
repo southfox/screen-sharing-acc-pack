@@ -32,13 +32,13 @@
     self.screenSharer = [[OTScreenSharer alloc] init];
     self.screenSharer.dataSource = self;
     [self.screenSharer connectWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view
-                               handler:^(OTScreenShareSignal signal, NSError *error) {
+                               handler:^(OTCommunicationSignal signal, NSError *error) {
         
-                                   if (signal == OTScreenSharePublisherCreated) {
+                                   if (signal == OTPublisherCreated) {
                                        self.screenSharer.publisherView.frame = CGRectMake(10, 200, 100, 100);
                                        [self.view addSubview:self.screenSharer.publisherView];
                                    }
-                                   else if (signal == OTScreenShareSubscriberCreated) {
+                                   else if (signal == OTSubscriberReady) {
                                        self.screenSharer.subscriberView.frame = CGRectMake(10, 80, 100, 100);
                                        [self.view addSubview:self.screenSharer.subscriberView];
                                    }

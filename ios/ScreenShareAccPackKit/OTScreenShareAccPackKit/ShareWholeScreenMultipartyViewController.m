@@ -29,7 +29,7 @@
     self.screenSharer = [[OTMultiPartyScreenSharer alloc] init];
     self.screenSharer.dataSource = self;
     [self.screenSharer connectWithView:self.webView
-                               handler:^(OTMultiPartyScreenSharerSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error) {
+                               handler:^(OTCommunicationSignal signal, OTMultiPartyScreenShareRemote *subscriber, NSError *error) {
                                    
                                    if (signal == OTPublisherCreated) {
                                        self.screenSharer.publisherView.frame = CGRectMake(10, 200, 100, 100);
