@@ -4,11 +4,24 @@ The changelog for `screensharing-annotation-acc-pack` iOS.
 
 --------------------------------------
 
+2.0.2
+-----
+
+### Fixes
+- Correct a wrong signaling: `OTPublisherCreated` -> `OTSubscriberReady`
+
+2.0.1
+-----
+
+### Fixes
+- Put back the `isScreenSharing` boolean value
+
 2.0.0
 -----
 
 ### Enhancements
 - Remove shared instance so developers can control it.
+- Add OTMultiPartyScreenSharer for mutliparty screen sharing logic
 
 1.1.6
 -----

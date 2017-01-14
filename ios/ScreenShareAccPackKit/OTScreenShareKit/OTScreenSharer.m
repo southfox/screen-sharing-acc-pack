@@ -265,7 +265,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     if (subscriber == self.subscriber) {
         _subscriberView = [OTVideoView defaultPlaceHolderImageWithSubscriber:self.subscriber];
         _subscriberView.delegate = self;
-        [self notifiyAllWithSignal:OTSubscriberCreated
+        [self notifiyAllWithSignal:OTSubscriberReady
                              error:nil];
     }
 }
