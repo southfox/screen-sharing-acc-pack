@@ -230,9 +230,9 @@ static NSString * const KLogVariationFailure = @"Failure";
 - (void) session:(OTSession *)session streamDestroyed:(OTStream *)stream {
 
     if (self.subscriber.stream && [self.subscriber.stream.streamId isEqualToString:stream.streamId]) {
-        [self cleanupSubscriber];
         [self notifiyAllWithSignal:OTSubscriberDestroyed
                              error:nil];
+        [self cleanupSubscriber];
     }
 }
 

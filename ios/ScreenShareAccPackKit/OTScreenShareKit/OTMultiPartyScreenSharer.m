@@ -321,6 +321,9 @@ static NSString* const KLogVariationFailure = @"Failure";
         if (subscriberObject.subscriber.stream == stream) {
             OTError *error = nil;
             OTSubscriber *subscriber = subscriberObject.subscriber;
+            [self notifiyAllWithSignal:OTSubscriberDestroyed
+                            subscriber:subscriberObject
+                                 error:nil];
             [subscriber.view removeFromSuperview];
             [self.session unsubscribe:subscriber error:&error];
             if (error) {
@@ -331,9 +334,6 @@ static NSString* const KLogVariationFailure = @"Failure";
             subscriberObject.subscriber = nil;
             subscriberObject.subscriberView = nil;
             [self.subscribers removeObject:subscriberObject];
-            [self notifiyAllWithSignal:OTSubscriberDestroyed
-                            subscriber:subscriberObject
-                                 error:nil];
             break;
         }
     }
@@ -385,8 +385,8 @@ static NSString* const KLogVariationFailure = @"Failure";
     OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
     if ([self.subscribers containsObject:subscriberObject]) {
         [self.subscribers removeObject:subscriberObject];
+        [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
     }
-    [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
 }
 
 - (void)subscriber:(OTSubscriber *)subscriber didFailWithError:(OTError *)error {
