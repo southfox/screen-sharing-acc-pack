@@ -125,4 +125,6 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  */
 @property (nonatomic, getter=isSubscribeToVideo) BOOL subscribeToVideo;
 
+@property (readonly, nonatomic) NSString *userInfo;
+
 @end

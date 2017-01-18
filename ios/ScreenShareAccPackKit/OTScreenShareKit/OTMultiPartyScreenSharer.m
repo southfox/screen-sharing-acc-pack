@@ -14,9 +14,17 @@
 @interface OTMultiPartyScreenShareRemote()
 @property (nonatomic) OTSubscriber *subscriber;
 @property (nonatomic) OTVideoView *subscriberView;
+@property (nonatomic) NSString *userInfo;
 @end
 
 @implementation OTMultiPartyScreenShareRemote
+
+- (NSString *)userInfo {
+    if (!self.subscriber.stream.connection) {
+        return nil;
+    }
+    return self.subscriber.stream.connection.data;
+}
 
 - (BOOL)isEqual:(id)object {
     if (![object isKindOfClass:[OTMultiPartyScreenShareRemote class]]) {
@@ -384,7 +392,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 - (void)subscriber:(OTSubscriber *)subscriber didFailWithError:(OTError *)error {
     
     OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
-    [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
+    [self notifiyAllWithSignal:OTCommunicationError subscriber:subscriberObject error:nil];
 }
 
 #pragma mark - OTVideoViewProtocol
