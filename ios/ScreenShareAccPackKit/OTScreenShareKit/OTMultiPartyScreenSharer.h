@@ -61,6 +61,13 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  */
 @property (readonly, nonatomic) BOOL isScreenSharing;
 
+/**
+ *  A boolean value to indicate whether the publish is enabled. `YES` once the publisher
+ *  connects or after OTSessionDidConnect being signaled. `YES` means that it won't subscribe
+ *  to any streams, default is `NO`. turning it `NO` will make it subscribe to available streams.
+ *  Turning it `YES` will unsubscribe and remove all subscribers
+ */
+@property (readonly, nonatomic) BOOL isPublishOnly;
 
 #pragma mark - publisher
 /**

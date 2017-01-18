@@ -119,6 +119,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 
 @interface OTMultiPartyScreenSharer() <OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate, OTVideoViewProtocol>
 @property (nonatomic) BOOL isScreenSharing;
+@property (nonatomic) BOOL isPublishOnly;
 @property (nonatomic) NSString *name;
 @property (nonatomic) OTPublisher *publisher;
 @property (nonatomic) NSMutableArray *subscribers;
