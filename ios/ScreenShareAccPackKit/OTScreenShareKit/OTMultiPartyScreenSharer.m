@@ -366,20 +366,11 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)subscriberDidConnectToStream:(OTSubscriber *)subscriber {
-    for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
-        if (subscriberObject.subscriber == subscriber) {
-            [self notifiyAllWithSignal:OTSubscriberReady subscriber:subscriberObject error:nil];
-            break;
-        }
-    }
+    [self publishSubscriber:subscriber];
 }
 
 - (void)subscriberDidDisconnectFromStream:(OTSubscriber *)subscriber {
-    OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
-    if ([self.subscribers containsObject:subscriberObject]) {
-        [self.subscribers removeObject:subscriberObject];
-    }
-    [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
+    [self unPublishSubscriber:subscriber];
 }
 
 - (void)subscriber:(OTSubscriber *)subscriber didFailWithError:(OTError *)error {
@@ -423,6 +414,57 @@ static NSString* const KLogVariationFailure = @"Failure";
 
 - (void)setCameraPosition:(AVCaptureDevicePosition)cameraPosition {
     _publisher.cameraPosition = cameraPosition;
+}
+
+#pragma mark -
+#pragma mark PublishOnly flag
+
+- (void)setPublishOnly:(BOOL)publishOnly {
+    if (!_publisher) return;
+    if (publishOnly) {
+        [self publishAll];
+    }
+    else {
+        [self unPublishAll];
+    }
+    _publishOnly = publishOnly;
+}
+
+
+- (void)publishAll {
+    if (![self isPublishOnly]) {
+        for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
+            [self notifiyAllWithSignal:OTSubscriberReady subscriber:subscriberObject error:nil];
+        }
+    }
+}
+
+- (void)publishSubscriber:(OTSubscriber *)subscriber {
+    if (![self isPublishOnly]) {
+        for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
+            if (subscriberObject.subscriber == subscriber) {
+                [self notifiyAllWithSignal:OTSubscriberReady subscriber:subscriberObject error:nil];
+                break;
+            }
+        }
+    }
+}
+
+- (void)unPublishAll {
+    if (![self isPublishOnly]) {
+        for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
+            [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
+        }
+        [self.subscribers removeAllObjects];
+    }
+}
+
+- (void)unPublishSubscriber:(OTSubscriber *)subscriber {
+    OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
+    if ([self.subscribers containsObject:subscriberObject]) {
+        [self.subscribers removeObject:subscriberObject];
+    }
+    [self notifiyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
 }
 
 @end
