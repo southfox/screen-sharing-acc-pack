@@ -289,7 +289,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)session:(OTSession *)session streamCreated:(OTStream *)stream {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
     OTError *subscriberError;
@@ -312,7 +312,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)session:(OTSession *)session streamDestroyed:(OTStream *)stream {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
 
@@ -339,7 +339,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)sessionDidDisconnect:(OTSession *)session {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
 
@@ -349,7 +349,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)session:(OTSession *)session didFailWithError:(OTError *)error {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
 
@@ -359,7 +359,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)sessionDidBeginReconnecting:(OTSession *)session {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
     
@@ -369,7 +369,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)sessionDidReconnect:(OTSession *)session {
-    if (![self isPublishOnly]) {
+    if ([self isPublishOnly]) {
         return;
     }
     
