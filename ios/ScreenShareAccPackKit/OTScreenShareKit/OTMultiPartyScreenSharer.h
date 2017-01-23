@@ -66,7 +66,7 @@ typedef void (^OTMultiPartyScreenSharerBlock)(OTCommunicationSignal signal, OTMu
  *  Turning it `NO` will make it subscribe to available streams.
  *  Turning it `YES` will unsubscribe and remove all subscribers
  */
-@property (readonly, getter=isPublishOnly) BOOL publishOnly;
+@property (nonatomic, getter=isPublishOnly) BOOL publishOnly;
 
 #pragma mark - publisher
 /**
