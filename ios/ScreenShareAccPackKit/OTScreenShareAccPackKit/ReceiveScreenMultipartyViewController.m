@@ -1,21 +1,21 @@
 //
-//  OTReceiveScreenMultipartyViewController.m
+//  ReceiveScreenMultipartyViewController.m
 //  OTScreenShareKit
 //
 //  Created by javierfuchs on 1/23/17.
 //  Copyright © 2017 Tokbox, Inc. All rights reserved.
 //
 
-#import "OTReceiveScreenMultipartyViewController.h"
+#import "ReceiveScreenMultipartyViewController.h"
 #import "AppDelegate.h"
 #import "OTMultiPartyScreenSharer.h"
 
-@interface OTReceiveScreenMultipartyViewController () <OTMultiPartyScreenSharerDataSource>
+@interface ReceiveScreenMultipartyViewController () <OTMultiPartyScreenSharerDataSource>
 @property (nonatomic, strong) UIBarButtonItem *subscribeButton;
 @property (nonatomic) OTMultiPartyScreenSharer *screenSharer;
 @end
 
-@implementation OTReceiveScreenMultipartyViewController
+@implementation ReceiveScreenMultipartyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

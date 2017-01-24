@@ -339,40 +339,24 @@ static NSString* const KLogVariationFailure = @"Failure";
 }
 
 - (void)sessionDidDisconnect:(OTSession *)session {
-    if ([self isPublishOnly]) {
-        return;
-    }
-
     [self notifyAllWithSignal:OTPublisherDestroyed
                     subscriber:nil
                          error:nil];
 }
 
 - (void)session:(OTSession *)session didFailWithError:(OTError *)error {
-    if ([self isPublishOnly]) {
-        return;
-    }
-
     [self notifyAllWithSignal:OTCommunicationError
                     subscriber:nil
                          error:error];
 }
 
 - (void)sessionDidBeginReconnecting:(OTSession *)session {
-    if ([self isPublishOnly]) {
-        return;
-    }
-    
     [self notifyAllWithSignal:OTSessionDidBeginReconnecting
                     subscriber:nil
                          error:nil];
 }
 
 - (void)sessionDidReconnect:(OTSession *)session {
-    if ([self isPublishOnly]) {
-        return;
-    }
-    
     [self notifyAllWithSignal:OTSessionDidReconnect
                     subscriber:nil
                          error:nil];
@@ -457,9 +441,26 @@ static NSString* const KLogVariationFailure = @"Failure";
 
 
 - (void)updateSubscriber {
-    OTCommunicationSignal signal = [self isPublishOnly] ? OTSubscriberReady : OTSubscriberDestroyed;
     for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
-        [self notifyAllWithSignal:signal subscriber:subscriberObject error:nil];
+        if ([self isPublishOnly]) {
+            OTError *error = nil;
+            OTSubscriber *subscriber = subscriberObject.subscriber;
+            [subscriber.view removeFromSuperview];
+            [self.session unsubscribe:subscriber error:&error];
+            if (error) {
+                NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
+            }
+            [subscriberObject.subscriberView removeFromSuperview];
+            [subscriberObject.subscriberView clean];
+//            subscriberObject.subscriber = nil;
+//            subscriberObject.subscriberView = nil;
+        }
+        else {
+            OTError *subscriberError;
+            OTSubscriber *subscriber = [[OTSubscriber alloc] initWithStream:subscriberObject.subscriber.stream delegate:self];
+            [self.session subscribe:subscriber error:&subscriberError];
+            
+        }
     }
 }
 

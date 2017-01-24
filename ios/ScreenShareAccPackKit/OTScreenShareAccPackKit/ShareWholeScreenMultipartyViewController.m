@@ -15,16 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIView *subscriberView3;
 @property (weak, nonatomic) IBOutlet UIView *subscriberView4;
 @property (nonatomic) OTMultiPartyScreenSharer *screenSharer;
-@property (nonatomic, strong) UIBarButtonItem *subscribeButton;
 @end
 
 @implementation ShareWholeScreenMultipartyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.rightBarButtonItem = self.subscribeButton;
-    
 
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.kayak.com/"]];
     [self.webView loadRequest:requestObj];
@@ -57,22 +53,6 @@
                                }];
 }
 
-- (UIBarButtonItem *)subscribeButton {
-    if (!_subscribeButton) {
-        _subscribeButton = [[UIBarButtonItem alloc] initWithTitle:([self.screenSharer isPublishOnly] ? @"Publish On" : @"Publish Off") style:UIBarButtonItemStylePlain target:self action:@selector(changePublishOnly)];
-    }
-    return _subscribeButton;
-}
-
-- (void)changePublishOnly {
-    self.screenSharer.publishOnly = ![self.screenSharer isPublishOnly];
-    self.subscribeButton.title = self.screenSharer.isPublishOnly ? @"Publish On" : @"Publish Off";
-}
-
-//- (void)viewDidLayoutSubviews {
-//    [super viewDidLayoutSubviews];
-//    self.subscribeButton.title = self.screenSharer.isPublishOnly ? @"Publish On" : @"Publish Off";
-//}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

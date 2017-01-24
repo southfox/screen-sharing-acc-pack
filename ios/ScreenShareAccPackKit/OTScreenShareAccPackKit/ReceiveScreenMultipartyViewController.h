@@ -1,5 +1,5 @@
 //
-//  OTReceiveScreenMultipartyViewController.h
+//  ReceiveScreenMultipartyViewController.h
 //  OTScreenShareKit
 //
 //  Created by javierfuchs on 1/23/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OTReceiveScreenMultipartyViewController : UIViewController
+@interface ReceiveScreenMultipartyViewController : UIViewController
 
 @end
