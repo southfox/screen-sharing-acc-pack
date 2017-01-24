@@ -87,7 +87,7 @@
 - (instancetype)initWithSubscriber:(OTSubscriber *)subscriber {
     if (self = [super init]) {
         _subscriber = subscriber;
-        _subscriberView = [[OTVideoView alloc] initWithSubscriber:self.subscriber];
+        _subscriberView = [OTVideoView defaultPlaceHolderImageWithSubscriber:self.subscriber];
     }
     return self;
 }
@@ -287,7 +287,7 @@ static NSString* const KLogVariationFailure = @"Failure";
     else {
         self.isScreenSharing = YES;
         if (!self.publisherView) {
-            self.publisherView = [[OTVideoView alloc] initWithPublisher:self.publisher];
+            self.publisherView = [OTVideoView defaultPlaceHolderImageWithPublisher:self.publisher];
             self.publisherView.delegate = self;
         }
         [self notifyAllWithSignal:OTPublisherCreated
@@ -328,7 +328,7 @@ static NSString* const KLogVariationFailure = @"Failure";
         if (subscriberObject.subscriber.stream == stream) {
             OTError *error = nil;
             OTSubscriber *subscriber = subscriberObject.subscriber;
-            [self notifiyAllWithSignal:OTSubscriberDestroyed
+            [self notifyAllWithSignal:OTSubscriberDestroyed
                             subscriber:subscriberObject
                                  error:nil];
             [subscriber.view removeFromSuperview];
