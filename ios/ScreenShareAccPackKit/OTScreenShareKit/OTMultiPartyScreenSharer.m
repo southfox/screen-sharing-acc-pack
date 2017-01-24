@@ -447,4 +447,20 @@ static NSString* const KLogVariationFailure = @"Failure";
     _publisher.cameraPosition = cameraPosition;
 }
 
+#pragma mark -
+#pragma mark PublishOnly flag
+
+- (void)setPublishOnly:(BOOL)publishOnly {
+    _publishOnly = publishOnly;
+    [self updateSubscriber];
+}
+
+
+- (void)updateSubscriber {
+    OTCommunicationSignal signal = [self isPublishOnly] ? OTSubscriberReady : OTSubscriberDestroyed;
+    for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
+        [self notifyAllWithSignal:signal subscriber:subscriberObject error:nil];
+    }
+}
+
 @end
