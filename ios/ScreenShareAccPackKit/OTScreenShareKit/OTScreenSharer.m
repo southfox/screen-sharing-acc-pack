@@ -194,7 +194,7 @@ static NSString * const KLogVariationFailure = @"Failure";
     else {
         self.isScreenSharing = YES;
         if (!self.publisherView) {
-            self.publisherView = [OTVideoView defaultPlaceHolderImageWithPublisher:self.publisher];
+            self.publisherView = [[OTVideoView alloc] initWithPublisher:self.publisher];
             self.publisherView.delegate = self;
         }
         [self notifiyAllWithSignal:OTPublisherCreated
@@ -230,9 +230,9 @@ static NSString * const KLogVariationFailure = @"Failure";
 - (void) session:(OTSession *)session streamDestroyed:(OTStream *)stream {
 
     if (self.subscriber.stream && [self.subscriber.stream.streamId isEqualToString:stream.streamId]) {
-        [self cleanupSubscriber];
         [self notifiyAllWithSignal:OTSubscriberDestroyed
                              error:nil];
+        [self cleanupSubscriber];
     }
 }
 
@@ -263,7 +263,7 @@ static NSString * const KLogVariationFailure = @"Failure";
 #pragma mark - OTSubscriberKitDelegate
 -(void) subscriberDidConnectToStream:(OTSubscriberKit*)subscriber {
     if (subscriber == self.subscriber) {
-        _subscriberView = [OTVideoView defaultPlaceHolderImageWithSubscriber:self.subscriber];
+        _subscriberView = [[OTVideoView alloc] initWithSubscriber:self.subscriber];
         _subscriberView.delegate = self;
         [self notifiyAllWithSignal:OTSubscriberReady
                              error:nil];
