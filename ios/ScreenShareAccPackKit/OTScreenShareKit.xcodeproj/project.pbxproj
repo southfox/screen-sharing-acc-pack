@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		054CFBE248BE62FF7E13655B /* libPods-OTScreenShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFACCFE95A64943DBD3FC1B9 /* libPods-OTScreenShareKit.a */; };
-		70999E891E36DF270013F024 /* ReceiveScreenMultipartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70999E871E36DF270013F024 /* ReceiveScreenMultipartyViewController.m */; };
-		9A32502A4FEDA55C5CC19087 /* libPods-OTScreenShareKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91EF486630EA83A64FF7BB11 /* libPods-OTScreenShareKitTests.a */; };
 		A000CAE61E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE11E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m */; };
 		A000CAE71E0C328C00CF4DB0 /* OTScreenCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE31E0C328C00CF4DB0 /* OTScreenCapture.m */; };
 		A000CAE81E0C328C00CF4DB0 /* OTScreenSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = A000CAE51E0C328C00CF4DB0 /* OTScreenSharer.m */; };
@@ -53,12 +50,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		70999E871E36DF270013F024 /* ReceiveScreenMultipartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiveScreenMultipartyViewController.m; sourceTree = "<group>"; };
-		70999E881E36DF270013F024 /* ReceiveScreenMultipartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiveScreenMultipartyViewController.h; sourceTree = "<group>"; };
-		75624193A1489D8142317883 /* Pods-OTScreenShareKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKit/Pods-OTScreenShareKit.release.xcconfig"; sourceTree = "<group>"; };
-		7A9725D18435530A1331F840 /* Pods-OTScreenShareKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKitTests/Pods-OTScreenShareKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		8FBC3A8BEBAD49A4EDF486B0 /* Pods-OTScreenShareKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKit/Pods-OTScreenShareKit.debug.xcconfig"; sourceTree = "<group>"; };
-		91EF486630EA83A64FF7BB11 /* libPods-OTScreenShareKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OTScreenShareKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A000CAE01E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMultiPartyScreenSharer.h; sourceTree = "<group>"; };
 		A000CAE11E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMultiPartyScreenSharer.m; sourceTree = "<group>"; };
 		A000CAE21E0C328C00CF4DB0 /* OTScreenCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTScreenCapture.h; sourceTree = "<group>"; };
@@ -88,8 +79,6 @@
 		A0FEAC021D73BBB8000BDDA4 /* OTScreenShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OTScreenShareKit.podspec; sourceTree = "<group>"; };
 		A0FEAC031D73BBB8000BDDA4 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0FEAC061D73BBDE000BDDA4 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-		BA9E36FD81A473A9E19CAE53 /* Pods-OTScreenShareKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OTScreenShareKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OTScreenShareKitTests/Pods-OTScreenShareKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FFACCFE95A64943DBD3FC1B9 /* libPods-OTScreenShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OTScreenShareKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +86,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				054CFBE248BE62FF7E13655B /* libPods-OTScreenShareKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A32502A4FEDA55C5CC19087 /* libPods-OTScreenShareKitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +122,6 @@
 				A0CFE1621D25BFB800D8449B /* OTScreenShareAccPackKit */,
 				A0CFE44B1D25F28400D8449B /* OTScreenShareKitTests */,
 				A09A4AA21CD02A800024C349 /* Products */,
-				EB5BB70E94B4056E2FF5F914 /* Pods */,
-				D83C84E89DA0038442E3F998 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,8 +147,6 @@
 				A08B325E1E010D9500530916 /* ShareWholeScreenMultipartyViewController.m */,
 				A0F292181D8667DF00BC6A53 /* ReceiveScreenViewController.h */,
 				A0F292191D8667DF00BC6A53 /* ReceiveScreenViewController.m */,
-				70999E881E36DF270013F024 /* ReceiveScreenMultipartyViewController.h */,
-				70999E871E36DF270013F024 /* ReceiveScreenMultipartyViewController.m */,
 				A058350D1D2F4E4700E484FB /* ColorViewController.h */,
 				A058350E1D2F4E4700E484FB /* ColorViewController.m */,
 				A0CFE16C1D25BFB800D8449B /* Main.storyboard */,
@@ -183,26 +166,6 @@
 			path = OTScreenShareKitTests;
 			sourceTree = "<group>";
 		};
-		D83C84E89DA0038442E3F998 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FFACCFE95A64943DBD3FC1B9 /* libPods-OTScreenShareKit.a */,
-				91EF486630EA83A64FF7BB11 /* libPods-OTScreenShareKitTests.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB5BB70E94B4056E2FF5F914 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8FBC3A8BEBAD49A4EDF486B0 /* Pods-OTScreenShareKit.debug.xcconfig */,
-				75624193A1489D8142317883 /* Pods-OTScreenShareKit.release.xcconfig */,
-				BA9E36FD81A473A9E19CAE53 /* Pods-OTScreenShareKitTests.debug.xcconfig */,
-				7A9725D18435530A1331F840 /* Pods-OTScreenShareKitTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -210,13 +173,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A09A4AB81CD02A800024C349 /* Build configuration list for PBXNativeTarget "OTScreenShareKit" */;
 			buildPhases = (
-				54DC308EA617911B83C7459A /* [CP] Check Pods Manifest.lock */,
 				A09A4A9D1CD02A800024C349 /* Sources */,
 				A09A4A9E1CD02A800024C349 /* Frameworks */,
 				A09A4A9F1CD02A800024C349 /* Resources */,
 				A04B6E351DDBD63200AC0C25 /* Embed Frameworks */,
-				CCC23CC495DC24575AC93C79 /* [CP] Embed Pods Frameworks */,
-				BA195417A2B192F360DF7C31 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,12 +191,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0CFE46A1D25F49D00D8449B /* Build configuration list for PBXNativeTarget "OTScreenShareKitTests" */;
 			buildPhases = (
-				3317C5364DD0722480C2B0B7 /* [CP] Check Pods Manifest.lock */,
 				A0CFE45F1D25F49D00D8449B /* Sources */,
 				A0CFE4601D25F49D00D8449B /* Frameworks */,
 				A0CFE4611D25F49D00D8449B /* Resources */,
-				FA2615DA75AC5A4AC766DFC7 /* [CP] Embed Pods Frameworks */,
-				F84A934858B22CA6FFF8FB9C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -309,105 +266,11 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		3317C5364DD0722480C2B0B7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		54DC308EA617911B83C7459A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BA195417A2B192F360DF7C31 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OTScreenShareKit/Pods-OTScreenShareKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CCC23CC495DC24575AC93C79 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OTScreenShareKit/Pods-OTScreenShareKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F84A934858B22CA6FFF8FB9C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OTScreenShareKitTests/Pods-OTScreenShareKitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA2615DA75AC5A4AC766DFC7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OTScreenShareKitTests/Pods-OTScreenShareKitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		A09A4A9D1CD02A800024C349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70999E891E36DF270013F024 /* ReceiveScreenMultipartyViewController.m in Sources */,
 				A000CAE61E0C328C00CF4DB0 /* OTMultiPartyScreenSharer.m in Sources */,
 				A0CFE1781D25BFB800D8449B /* main.m in Sources */,
 				A0FEAC071D73BBDE000BDDA4 /* CHANGELOG.md in Sources */,
@@ -549,7 +412,6 @@
 		};
 		A09A4AB91CD02A800024C349 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FBC3A8BEBAD49A4EDF486B0 /* Pods-OTScreenShareKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -567,7 +429,6 @@
 		};
 		A09A4ABA1CD02A800024C349 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75624193A1489D8142317883 /* Pods-OTScreenShareKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -585,7 +446,6 @@
 		};
 		A0CFE46B1D25F49D00D8449B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA9E36FD81A473A9E19CAE53 /* Pods-OTScreenShareKitTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = OTScreenShareKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -597,7 +457,6 @@
 		};
 		A0CFE46C1D25F49D00D8449B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A9725D18435530A1331F840 /* Pods-OTScreenShareKitTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = OTScreenShareKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
