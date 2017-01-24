@@ -459,8 +459,6 @@ static NSString* const KLogVariationFailure = @"Failure";
             }
             [subscriberObject.subscriberView removeFromSuperview];
             [subscriberObject.subscriberView clean];
-//            subscriberObject.subscriber = nil;
-//            subscriberObject.subscriberView = nil;
         }
         else {
             OTError *subscriberError;
