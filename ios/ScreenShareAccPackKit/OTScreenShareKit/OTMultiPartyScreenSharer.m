@@ -330,9 +330,6 @@ static NSString* const KLogVariationFailure = @"Failure";
             subscriberObject.subscriber = nil;
             subscriberObject.subscriberView = nil;
             [self.subscribers removeObject:subscriberObject];
-            [self notifyAllWithSignal:OTSubscriberDestroyed
-                            subscriber:subscriberObject
-                                 error:nil];
             break;
         }
     }
@@ -391,7 +388,7 @@ static NSString* const KLogVariationFailure = @"Failure";
 - (void)subscriber:(OTSubscriber *)subscriber didFailWithError:(OTError *)error {
     
     OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
-    [self notifyAllWithSignal:OTSubscriberDestroyed subscriber:subscriberObject error:nil];
+    [self notifyAllWithSignal:OTCommunicationError subscriber:subscriberObject error:nil];
 }
 
 #pragma mark - OTVideoViewProtocol
