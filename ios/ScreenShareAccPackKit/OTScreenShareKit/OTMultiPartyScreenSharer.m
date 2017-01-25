@@ -448,8 +448,8 @@ static NSString* const KLogVariationFailure = @"Failure";
 
 
 - (void)updateSubscriber {
-    for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
-        if (self.isPublishOnly) {
+    if (self.isPublishOnly) {
+        for (OTMultiPartyScreenShareRemote *subscriberObject in self.subscribers) {
             OTError *error = nil;
             OTSubscriber *subscriber = subscriberObject.subscriber;
             [subscriber.view removeFromSuperview];
@@ -459,12 +459,32 @@ static NSString* const KLogVariationFailure = @"Failure";
             }
             [subscriberObject.subscriberView removeFromSuperview];
             [subscriberObject.subscriberView clean];
+            subscriberObject.subscriber = nil;
+            subscriberObject.subscriberView = nil;
         }
-        else {
+        [self.subscribers removeAllObjects];
+    }
+    else {
+        NSDictionary *streams = self.session.streams;
+        for (NSString *stream in streams) {            
             OTError *subscriberError;
-            OTSubscriber *subscriber = [[OTSubscriber alloc] initWithStream:subscriberObject.subscriber.stream delegate:self];
+            OTSubscriber *subscriber = [[OTSubscriber alloc] initWithStream:streams[stream] delegate:self];
             [self.session subscribe:subscriber error:&subscriberError];
             
+            if (!subscriberError) {
+                OTMultiPartyScreenShareRemote *subscriberObject = [[OTMultiPartyScreenShareRemote alloc] initWithSubscriber:subscriber];
+                if (!self.subscribers) {
+                    self.subscribers = [[NSMutableArray alloc] init];
+                }
+                [self.subscribers addObject:subscriberObject];
+                [self notifyAllWithSignal:OTSubscriberCreated subscriber:subscriberObject error:nil];
+            }
+            else {
+                [self notifyAllWithSignal:OTCommunicationError
+                               subscriber:nil
+                                    error:subscriberError];
+            }
+
         }
     }
 }
